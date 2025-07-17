@@ -68,23 +68,23 @@ const Contact = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
-            Get In <span className="text-cyan-400">Touch</span>
+            Get In <span className="text-green-400">Touch</span>
           </h2>
 
           <div className="grid md:grid-cols-2 gap-12">
             <div>
-              <div className="bg-gray-900/90 backdrop-blur-sm border border-gray-800 rounded-lg p-6 mb-8">
+              <div className="code-block backdrop-blur-sm p-6 mb-8">
                 <div className="font-mono text-sm mb-4">
-                  <div className="text-slate-400">// Let's connect!</div>
-                  <div className="text-cyan-400">{'function getInTouch() {'}</div>
-                  <div className="ml-4 text-slate-300">
+                  <div className="text-gray-400">// Let's connect!</div>
+                  <div className="text-green-400">{'function getInTouch() {'}</div>
+                  <div className="ml-4 text-gray-300">
                     <div>return <span className="text-green-400">"Ready to collaborate!"</span>;</div>
                   </div>
-                  <div className="text-cyan-400">{'}'}</div>
+                  <div className="text-green-400">{'}'}</div>
                 </div>
               </div>
 
-              <p className="text-slate-300 text-lg leading-relaxed mb-8">
+              <p className="text-gray-300 text-lg leading-relaxed mb-8">
                 I'm always open to discussing new opportunities, innovative projects, 
                 or just having a chat about technology. Feel free to reach out!
               </p>
@@ -94,14 +94,14 @@ const Contact = () => {
                   <a
                     key={index}
                     href={item.href}
-                    className="flex items-center space-x-4 text-slate-300 hover:text-cyan-400 transition-colors duration-200 group"
+                    className="flex items-center space-x-4 text-gray-300 hover:text-green-400 transition-colors duration-200 group"
                   >
-                    <div className="bg-gray-900/80 border border-gray-800 rounded-lg p-3 group-hover:border-cyan-400/50 transition-all duration-300">
+                    <div className="terminal-border p-3 group-hover:border-green-400/50 transition-all duration-300">
                       <item.icon className="h-5 w-5" />
                     </div>
                     <div>
-                      <div className="text-sm text-slate-400">{item.label}</div>
-                      <div className="text-white">{item.value}</div>
+                      <div className="text-sm text-gray-400 font-mono">{item.label}</div>
+                      <div className="text-white font-mono">{item.value}</div>
                     </div>
                   </a>
                 ))}
@@ -112,16 +112,16 @@ const Contact = () => {
                   <a
                     key={index}
                     href={social.href}
-                    className="bg-gray-900/80 border border-gray-800 rounded-lg p-3 hover:border-cyan-400/50 hover:bg-cyan-400/10 transition-all duration-300 transform hover:scale-110"
+                    className="terminal-border p-3 hover:border-green-400/50 hover:bg-green-400/10 transition-all duration-300 transform hover:scale-110"
                     aria-label={social.label}
                   >
-                    <social.icon className="h-5 w-5 text-slate-400 hover:text-cyan-400 transition-colors duration-200" />
+                    <social.icon className="h-5 w-5 text-gray-400 hover:text-green-400 transition-colors duration-200" />
                   </a>
                 ))}
               </div>
             </div>
 
-            <div className="bg-gray-900/90 backdrop-blur-sm border border-gray-800 rounded-lg p-6">
+            <div className="terminal-border backdrop-blur-sm p-6">
               <form 
                 name="contact" 
                 method="POST" 
@@ -134,7 +134,7 @@ const Contact = () => {
                 <input type="hidden" name="bot-field" />
 
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2">
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2 font-mono">
                     Name
                   </label>
                   <input
@@ -143,14 +143,14 @@ const Contact = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full bg-black border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all duration-200"
+                    className="w-full bg-black border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-green-400 focus:ring-1 focus:ring-green-400 transition-all duration-200 font-mono"
                     placeholder="Your name"
                     required
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2 font-mono">
                     Email
                   </label>
                   <input
@@ -159,14 +159,14 @@ const Contact = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full bg-black border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all duration-200"
+                    className="w-full bg-black border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-green-400 focus:ring-1 focus:ring-green-400 transition-all duration-200 font-mono"
                     placeholder="your.email@example.com"
                     required
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-slate-300 mb-2">
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2 font-mono">
                     Message
                   </label>
                   <textarea
@@ -175,7 +175,7 @@ const Contact = () => {
                     value={formData.message}
                     onChange={handleChange}
                     rows={5}
-                    className="w-full bg-black border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all duration-200 resize-none"
+                    className="w-full bg-black border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-green-400 focus:ring-1 focus:ring-green-400 transition-all duration-200 resize-none font-mono"
                     placeholder="Tell me about your project or just say hi!"
                     required
                   />
@@ -187,11 +187,11 @@ const Contact = () => {
                   className={`w-full font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 ${
                     isSubmitting 
                       ? 'bg-gray-600 cursor-not-allowed' 
-                      : 'bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600'
-                  } text-white`}
+                      : 'bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600'
+                  } text-black font-mono`}
                 >
                   <Send size={18} />
-                  <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
+                  <span>{isSubmitting ? 'Sending...' : './send_message.sh'}</span>
                 </button>
 
                 {submitStatus === 'success' && (

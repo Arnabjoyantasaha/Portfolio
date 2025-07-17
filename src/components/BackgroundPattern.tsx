@@ -3,28 +3,43 @@ import React from 'react';
 const BackgroundPattern = () => {
   return (
     <div className="fixed inset-0 z-0">
-      {/* Animated grid pattern */}
+      {/* Matrix-style grid pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{
           backgroundImage: `
-            linear-gradient(rgba(34, 211, 238, 0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(34, 211, 238, 0.1) 1px, transparent 1px)
+            linear-gradient(rgba(0, 255, 65, 0.2) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 255, 65, 0.2) 1px, transparent 1px)
           `,
-          backgroundSize: '50px 50px'
+          backgroundSize: '40px 40px'
         }} />
       </div>
 
-      {/* Floating geometric shapes */}
+      {/* Matrix rain effect */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-cyan-400 rounded-full animate-pulse opacity-60" />
-        <div className="absolute top-1/3 right-1/4 w-1 h-1 bg-green-400 rounded-full animate-pulse opacity-40" />
-        <div className="absolute bottom-1/4 left-1/3 w-3 h-3 bg-blue-400 rounded-full animate-pulse opacity-30" />
-        <div className="absolute bottom-1/3 right-1/3 w-2 h-2 bg-purple-400 rounded-full animate-pulse opacity-50" />
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute text-green-400 font-mono text-xs opacity-20 animate-matrix"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${3 + Math.random() * 2}s`
+            }}
+          >
+            {Math.random() > 0.5 ? '1' : '0'}
+          </div>
+        ))}
       </div>
 
-      {/* Gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-gray-900 opacity-98" />
-      <div className="absolute inset-0 bg-gradient-to-tr from-cyan-900/5 via-transparent to-blue-900/5" />
+      {/* Terminal-style gradient overlays */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black opacity-95" />
+      <div className="absolute inset-0 bg-gradient-to-tr from-green-900/5 via-transparent to-green-900/10" />
+      
+      {/* Scanlines effect */}
+      <div className="absolute inset-0 opacity-5" style={{
+        backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 65, 0.1) 2px, rgba(0, 255, 65, 0.1) 4px)',
+      }} />
     </div>
   );
 };

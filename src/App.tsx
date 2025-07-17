@@ -9,7 +9,7 @@ import BackgroundPattern from './components/BackgroundPattern';
 
 function App() {
   return (
-    <div className="min-h-screen bg-black text-white relative overflow-x-hidden">
+    <div className="min-h-screen bg-black text-white relative overflow-x-hidden font-mono">
       <BackgroundPattern />
       <Header />
       <main className="relative z-10">
