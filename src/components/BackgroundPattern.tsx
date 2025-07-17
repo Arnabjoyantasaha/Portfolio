@@ -2,44 +2,55 @@ import React from 'react';
 
 const BackgroundPattern = () => {
   return (
-    <div className="fixed inset-0 z-0">
-      {/* Matrix-style grid pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
+    <div className="fixed inset-0 z-0 overflow-hidden">
+      {/* Base gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900" />
+      
+      {/* Subtle grid pattern */}
+      <div 
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
           backgroundImage: `
-            linear-gradient(rgba(0, 255, 65, 0.2) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0, 255, 65, 0.2) 1px, transparent 1px)
+            linear-gradient(rgba(0, 255, 65, 0.3) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 255, 65, 0.3) 1px, transparent 1px)
           `,
-          backgroundSize: '40px 40px'
-        }} />
+          backgroundSize: '60px 60px'
+        }}
+      />
+      
+      {/* Animated gradient orbs */}
+      <div className="absolute inset-0">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-green-500/5 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute top-3/4 right-1/4 w-80 h-80 bg-emerald-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-green-400/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }} />
       </div>
-
-      {/* Matrix rain effect */}
-      <div className="absolute inset-0 overflow-hidden">
-        {[...Array(20)].map((_, i) => (
+      
+      {/* Floating particles - optimized */}
+      <div className="absolute inset-0">
+        {[...Array(15)].map((_, i) => (
           <div
             key={i}
-            className="absolute text-green-400 font-mono text-xs opacity-20 animate-matrix"
+            className="absolute w-1 h-1 bg-green-400/20 rounded-full animate-float"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${3 + Math.random() * 2}s`
+              animationDelay: `${Math.random() * 6}s`,
+              animationDuration: `${4 + Math.random() * 4}s`
             }}
-          >
-            {Math.random() > 0.5 ? '1' : '0'}
-          </div>
+          />
         ))}
       </div>
-
-      {/* Terminal-style gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black opacity-95" />
-      <div className="absolute inset-0 bg-gradient-to-tr from-green-900/5 via-transparent to-green-900/10" />
       
-      {/* Scanlines effect */}
-      <div className="absolute inset-0 opacity-5" style={{
-        backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 65, 0.1) 2px, rgba(0, 255, 65, 0.1) 4px)',
-      }} />
+      {/* Subtle scanlines effect */}
+      <div 
+        className="absolute inset-0 opacity-[0.02] pointer-events-none"
+        style={{
+          backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 65, 0.1) 2px, rgba(0, 255, 65, 0.1) 4px)',
+        }}
+      />
+      
+      {/* Radial gradient overlay for depth */}
+      <div className="absolute inset-0 bg-gradient-radial from-transparent via-black/20 to-black/40" />
     </div>
   );
 };
