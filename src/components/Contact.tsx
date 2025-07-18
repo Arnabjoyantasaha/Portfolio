@@ -67,13 +67,13 @@ const Contact = () => {
     <section id="contact" className="py-20 scroll-animate">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 neon-flicker">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
             Get In <span className="text-green-400">Touch</span>
           </h2>
 
           <div className="grid md:grid-cols-2 gap-12">
             <div className="animate-slide-in-left">
-              <div className="sci-fi-border backdrop-blur-sm p-6 mb-8 hover-lift hologram-effect">
+              <div className="sci-fi-border backdrop-blur-sm p-6 mb-8 hover-lift">
                 <div className="font-mono text-sm mb-4">
                   <div className="text-gray-400">// Let's connect!</div>
                   <div className="text-green-400">{'function getInTouch() {'}</div>
@@ -94,10 +94,10 @@ const Contact = () => {
                   <a
                     key={index}
                     href={item.href}
-                    className="flex items-center space-x-4 text-gray-300 hover:text-green-400 transition-all duration-300 group hover:scale-105 hover:translate-x-2"
+                    className="flex items-center space-x-4 text-gray-300 hover:text-green-400 transition-all duration-300 group hover:scale-105"
                   >
                     <div className="sci-fi-border p-3 group-hover:border-green-400/50 transition-all duration-300 hover-lift">
-                      <item.icon className="h-5 w-5 transition-all duration-300 group-hover:rotate-12" />
+                      <item.icon className="h-5 w-5 transition-all duration-300" />
                     </div>
                     <div>
                       <div className="text-sm text-gray-400 font-mono">{item.label}</div>
@@ -112,7 +112,7 @@ const Contact = () => {
                   <a
                     key={index}
                     href={social.href}
-                    className="sci-fi-border p-3 hover:border-green-400/50 hover:bg-green-400/10 transition-all duration-300 transform hover:scale-125 hover:rotate-12 glow-on-hover"
+                    className="sci-fi-border p-3 hover:border-green-400/50 hover:bg-green-400/10 transition-all duration-300 transform hover:scale-110"
                     aria-label={social.label}
                   >
                     <social.icon className="h-5 w-5 text-gray-400 hover:text-green-400 transition-all duration-300" />
@@ -121,7 +121,7 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="sci-fi-border backdrop-blur-sm p-6 hover-lift hologram-effect animate-slide-in-right">
+            <div className="sci-fi-border backdrop-blur-sm p-6 hover-lift animate-slide-in-right">
               <form 
                 name="contact" 
                 method="POST" 
@@ -184,13 +184,13 @@ const Contact = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-full font-semibold py-3 px-6 rounded-lg transition-all duration-500 transform hover:scale-110 hover:rotate-1 flex items-center justify-center space-x-2 animate-pulse-glow hover-lift ${
+                  className={`w-full font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 hover-lift ${
                     isSubmitting 
                       ? 'bg-gray-600 cursor-not-allowed' 
                       : 'bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600'
                   } text-black font-mono`}
                 >
-                  <Send size={18} className="transition-all duration-300 hover:rotate-12" />
+                  <Send size={18} className="transition-all duration-300" />
                   <span>{isSubmitting ? 'Sending...' : './send_message.sh'}</span>
                 </button>
 

@@ -66,7 +66,7 @@ const Header = () => {
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
-                className="relative text-gray-300 hover:text-green-400 transition-all duration-300 capitalize font-medium font-mono hover:scale-110 glow-on-hover"
+                className="relative text-gray-300 hover:text-green-400 transition-all duration-300 capitalize font-medium font-mono hover:scale-105"
               >
                 {item}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green-400 to-emerald-500 transition-all duration-500 hover:w-full"></span>
@@ -76,7 +76,7 @@ const Header = () => {
 
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-gray-300 hover:text-green-400 transition-all duration-300 hover:scale-110 hover:rotate-90"
+            className="md:hidden p-2 text-gray-300 hover:text-green-400 transition-all duration-300 hover:scale-105"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>

@@ -13,13 +13,13 @@ const About = () => {
     <section id="about" className="py-20 bg-black scroll-animate">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 neon-flicker">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
             <span className="text-green-400">About</span> Me
           </h2>
 
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="animate-slide-in-left">
-              <div className="sci-fi-border backdrop-blur-sm p-6 mb-8 hover-lift hologram-effect">
+              <div className="sci-fi-border backdrop-blur-sm p-6 mb-8 hover-lift">
                 <div className="font-mono text-sm mb-4">
                   <div className="text-gray-400">// Student Profile</div>
                   <div className="text-green-400">{'const student = {'}</div>
@@ -52,10 +52,10 @@ const About = () => {
               {interests.map((interest, index) => (
                 <div
                   key={index}
-                  className="sci-fi-border backdrop-blur-sm p-6 hover:border-green-400/50 transition-all duration-500 transform hover:scale-110 hover:rotate-1 glow-on-hover hover-lift"
+                  className="sci-fi-border backdrop-blur-sm p-6 hover:border-green-400/50 transition-all duration-300 transform hover:scale-105 hover-lift"
                   style={{ animationDelay: `${index * 0.2}s` }}
                 >
-                  <interest.icon className="h-8 w-8 text-green-400 mb-3 transition-all duration-300 hover:scale-125 hover:rotate-12" />
+                  <interest.icon className="h-8 w-8 text-green-400 mb-3 transition-all duration-300 hover:scale-110" />
                   <h3 className="text-white font-semibold mb-2">{interest.title}</h3>
                   <p className="text-gray-400 text-sm font-mono">{interest.description}</p>
                 </div>

@@ -38,7 +38,7 @@ const Skills = () => {
     <section id="skills" className="py-20 scroll-animate">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 neon-flicker">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
             <span className="text-green-400">Skills</span> & Technologies
           </h2>
 
@@ -46,7 +46,7 @@ const Skills = () => {
             {skillCategories.map((category, categoryIndex) => (
               <div
                 key={categoryIndex}
-                className="sci-fi-border backdrop-blur-sm p-6 hover:border-green-400/50 transition-all duration-500 glow-on-hover hover-lift hologram-effect"
+                className="sci-fi-border backdrop-blur-sm p-6 hover:border-green-400/50 transition-all duration-300 hover-lift"
                 style={{ animationDelay: `${categoryIndex * 0.3}s` }}
               >
                 <h3 className="text-xl font-semibold text-white mb-6 text-center transition-all duration-300 hover:text-green-400">
@@ -61,7 +61,7 @@ const Skills = () => {
                       </div>
                       <div className="w-full bg-gray-800 rounded-full h-2">
                         <div
-                          className="bg-gradient-to-r from-green-500 to-emerald-500 h-2 rounded-full transition-all duration-1500 ease-out shadow-lg animate-pulse-glow"
+                          className="bg-gradient-to-r from-green-500 to-emerald-500 h-2 rounded-full transition-all duration-1000 ease-out"
                           style={{ width: `${skill.level}%` }}
                         ></div>
                       </div>
@@ -73,7 +73,7 @@ const Skills = () => {
           </div>
 
           <div className="mt-12 text-center">
-            <div className="inline-block sci-fi-border backdrop-blur-sm p-4 font-mono text-sm hover-lift hologram-effect animate-fade-in">
+            <div className="inline-block sci-fi-border backdrop-blur-sm p-4 font-mono text-sm hover-lift animate-fade-in">
               <div className="text-gray-400 mb-2">// Currently Learning</div>
               <div className="text-green-400">
                 const learning = [<span className="text-green-400">"GraphQL"</span>, <span className="text-green-400">"Kubernetes"</span>, <span className="text-green-400">"Machine Learning"</span>];

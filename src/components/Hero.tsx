@@ -35,7 +35,7 @@ const Hero = () => {
       <div className="container mx-auto px-4 text-center">
         <div className="max-w-4xl mx-auto scroll-animate">
           {/* Terminal-style greeting */}
-          <div className="inline-block sci-fi-border backdrop-blur-sm p-4 mb-8 font-mono text-sm hover-lift hologram-effect">
+          <div className="inline-block sci-fi-border backdrop-blur-sm p-4 mb-8 font-mono text-sm hover-lift">
             <div className="flex items-center space-x-2 mb-2">
               <Terminal className="h-4 w-4 text-green-400" />
               <span className="text-gray-400">arnab@dev-machine:~$</span>
@@ -51,7 +51,7 @@ const Hero = () => {
 
           <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-slide-in-up">
             <span className="text-white">Hi, I'm </span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-500 glitch neon-flicker">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-500">
               Arnab Joyanta Saha
             </span>
           </h1>
@@ -65,26 +65,26 @@ const Hero = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 animate-slide-in-right">
             <button
               onClick={() => scrollToSection('projects')}
-              className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-black font-semibold py-3 px-8 rounded-lg transition-all duration-500 transform hover:scale-110 hover:rotate-1 shadow-lg shadow-green-500/25 font-mono animate-pulse-glow hover-lift"
+              className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-black font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-green-500/25 font-mono hover-lift"
             >
               ./view_projects.sh
             </button>
             <button
               onClick={() => scrollToSection('contact')}
-              className="border border-green-400 text-green-400 hover:bg-green-400 hover:text-black font-semibold py-3 px-8 rounded-lg transition-all duration-500 transform hover:scale-110 hover:-rotate-1 backdrop-blur-sm font-mono hover-lift"
+              className="border border-green-400 text-green-400 hover:bg-green-400 hover:text-black font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 backdrop-blur-sm font-mono hover-lift"
             >
               ./contact.sh
             </button>
           </div>
 
           <div className="flex justify-center space-x-6 animate-fade-in">
-            <a href="https://github.com/Arnabjoyantasaha" className="text-gray-400 hover:text-green-400 transition-all duration-300 transform hover:scale-125 hover:rotate-12 glow-on-hover">
+            <a href="https://github.com/Arnabjoyantasaha" className="text-gray-400 hover:text-green-400 transition-all duration-300 transform hover:scale-110">
               <Github size={24} />
             </a>
-            <a href="https://www.linkedin.com/in/arnab-joyanta-saha-3b2435301" className="text-gray-400 hover:text-green-400 transition-all duration-300 transform hover:scale-125 hover:-rotate-12 glow-on-hover">
+            <a href="https://www.linkedin.com/in/arnab-joyanta-saha-3b2435301" className="text-gray-400 hover:text-green-400 transition-all duration-300 transform hover:scale-110">
               <Linkedin size={24} />
             </a>
-            <a href="mailto:arnabjoyantasaha@gmail.com" className="text-gray-400 hover:text-green-400 transition-all duration-300 transform hover:scale-125 hover:rotate-12 glow-on-hover">
+            <a href="mailto:arnabjoyantasaha@gmail.com" className="text-gray-400 hover:text-green-400 transition-all duration-300 transform hover:scale-110">
               <Mail size={24} />
             </a>
           </div>
@@ -92,7 +92,7 @@ const Hero = () => {
 
         <button
           onClick={() => scrollToSection('about')}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-gray-400 hover:text-green-400 transition-all duration-300 animate-bounce hover:scale-125 glow-on-hover"
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-gray-400 hover:text-green-400 transition-all duration-300 animate-bounce hover:scale-110"
         >
           <ChevronDown size={32} />
         </button>

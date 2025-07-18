@@ -27,7 +27,7 @@ const Projects = () => {
     <section id="projects" className="py-20 bg-black scroll-animate">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 neon-flicker">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
             My <span className="text-green-400">Projects</span>
           </h2>
 
@@ -35,17 +35,17 @@ const Projects = () => {
             {projects.map((project, index) => (
               <div
                 key={index}
-                className="sci-fi-border backdrop-blur-sm overflow-hidden hover:border-green-400/50 transition-all duration-500 transform hover:scale-110 hover:rotate-1 group glow-on-hover hover-lift hologram-effect"
+                className="sci-fi-border backdrop-blur-sm overflow-hidden hover:border-green-400/50 transition-all duration-300 transform hover:scale-105 group hover-lift"
                 style={{ animationDelay: `${index * 0.3}s` }}
               >
                 <div className="relative overflow-hidden">
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-125 group-hover:rotate-2"
+                    className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-black/90 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-                    <project.icon className="h-16 w-16 text-green-400 animate-pulse-glow" />
+                  <div className="absolute inset-0 bg-black/90 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+                    <project.icon className="h-16 w-16 text-green-400" />
                   </div>
                 </div>
 
@@ -69,14 +69,14 @@ const Projects = () => {
                   <div className="flex space-x-4">
                     <a
                       href={project.github}
-                      className="flex items-center space-x-2 text-gray-400 hover:text-green-400 transition-all duration-300 font-mono hover:scale-110 glow-on-hover"
+                      className="flex items-center space-x-2 text-gray-400 hover:text-green-400 transition-all duration-300 font-mono hover:scale-105"
                     >
                       <Github size={18} />
                       <span className="text-sm">Code</span>
                     </a>
                     <a
                       href={project.demo}
-                      className="flex items-center space-x-2 text-gray-400 hover:text-green-400 transition-all duration-300 font-mono hover:scale-110 glow-on-hover"
+                      className="flex items-center space-x-2 text-gray-400 hover:text-green-400 transition-all duration-300 font-mono hover:scale-105"
                     >
                       <ExternalLink size={18} />
                       <span className="text-sm">Demo</span>
@@ -90,9 +90,9 @@ const Projects = () => {
           <div className="mt-12 text-center">
             <a
               href="https://github.com/Arnabjoyantasaha"
-              className="inline-flex items-center space-x-2 sci-fi-border backdrop-blur-sm hover:border-green-400/50 text-white px-6 py-3 transition-all duration-500 transform hover:scale-110 hover:rotate-1 font-mono glow-on-hover hover-lift animate-fade-in"
+              className="inline-flex items-center space-x-2 sci-fi-border backdrop-blur-sm hover:border-green-400/50 text-white px-6 py-3 transition-all duration-300 transform hover:scale-105 font-mono hover-lift animate-fade-in"
             >
-              <Github size={20} className="transition-all duration-300 hover:rotate-12" />
+              <Github size={20} className="transition-all duration-300" />
               <span>./view_more_projects.sh</span>
             </a>
           </div>
