@@ -163,7 +163,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoadingComplete }) => {
         {/* Loading Status */}
         <div className="mb-6 loading-fade-in" style={{ animationDelay: '0.6s' }}>
           <div className="flex items-center justify-center space-x-3 mb-3">
-            <loadingSteps[currentStep].icon className="w-5 h-5 text-green-400 loading-pulse" />
+            {React.createElement(loadingSteps[currentStep].icon, { className: "w-5 h-5 text-green-400 loading-pulse" })}
             <span className="text-gray-300 font-mono text-sm">
               {loadingSteps[currentStep].text}
             </span>
