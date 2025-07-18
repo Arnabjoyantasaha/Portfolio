@@ -44,7 +44,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoadingComplete }) => {
           }
           return prev + 2;
         });
-      }, 60);
+      }, 30);
 
       // Step progression
       const progressSteps = () => {
@@ -58,11 +58,13 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoadingComplete }) => {
       progressSteps();
     };
 
-    startLoading();
+    // Start loading immediately
+    const timer = setTimeout(startLoading, 100);
 
     return () => {
       clearInterval(progressInterval);
       clearTimeout(stepTimeout);
+      clearTimeout(timer);
     };
   }, [currentStep, onLoadingComplete]);
 

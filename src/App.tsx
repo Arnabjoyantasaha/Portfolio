@@ -16,22 +16,31 @@ function App() {
     setIsLoading(false);
   };
 
+  // Fallback to show content after 5 seconds if loading doesn't complete
+  useEffect(() => {
+    const fallbackTimer = setTimeout(() => {
+      if (isLoading) {
+        setIsLoading(false);
+      }
+    }, 5000);
+
+    return () => clearTimeout(fallbackTimer);
+  }, [isLoading]);
+
   return (
     <div className="min-h-screen bg-black text-white relative overflow-x-hidden font-mono">
       {isLoading && <LoadingScreen onLoadingComplete={handleLoadingComplete} />}
       <BackgroundPattern />
       <SmoothScroll />
-      {!isLoading && <Header />}
+      <Header />
       <main className="relative z-10">
-        {!isLoading && (
-          <>
-            <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Contact />
-          </>
-        )}
+        <div className={`transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
+          <Hero />
+          <About />
+          <Skills />
+          <Projects />
+          <Contact />
+        </div>
       </main>
     </div>
   );
