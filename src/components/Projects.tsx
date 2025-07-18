@@ -90,7 +90,7 @@ const Projects = () => {
           <div className="mt-12 text-center">
             <a
               href="https://github.com/Arnabjoyantasaha"
-              className="inline-flex items-center space-x-2 sci-fi-border backdrop-blur-sm hover:border-green-400/50 text-white px-6 py-3 transition-all duration-300 transform hover:scale-105 font-mono hover-lift animate-fade-in"
+              className="inline-flex items-center space-x-2 sci-fi-border-enhanced backdrop-blur-sm hover:border-green-400/50 text-white px-6 py-3 transition-all duration-300 transform hover:scale-105 font-mono hover-lift animate-fade-in"
             >
               <Github size={20} className="transition-all duration-300" />
               <span>./view_more_projects.sh</span>

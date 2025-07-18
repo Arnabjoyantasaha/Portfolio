@@ -73,7 +73,7 @@ const Contact = () => {
 
           <div className="grid md:grid-cols-2 gap-12">
             <div className="animate-slide-in-left">
-              <div className="sci-fi-border backdrop-blur-sm p-6 mb-8 hover-lift">
+              <div className="sci-fi-border-enhanced backdrop-blur-sm p-6 mb-8 hover-lift">
                 <div className="font-mono text-sm mb-4">
                   <div className="text-gray-400">// Let's connect!</div>
                   <div className="text-green-400">{'function getInTouch() {'}</div>
@@ -112,7 +112,7 @@ const Contact = () => {
                   <a
                     key={index}
                     href={social.href}
-                    className="sci-fi-border p-3 hover:border-green-400/50 hover:bg-green-400/10 transition-all duration-300 transform hover:scale-110"
+                    className="sci-fi-border-pulse p-3 hover:border-green-400/50 hover:bg-green-400/10 transition-all duration-300 transform hover:scale-110"
                     aria-label={social.label}
                   >
                     <social.icon className="h-5 w-5 text-gray-400 hover:text-green-400 transition-all duration-300" />

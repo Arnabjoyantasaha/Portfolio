@@ -19,7 +19,7 @@ const About = () => {
 
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="animate-slide-in-left">
-              <div className="sci-fi-border backdrop-blur-sm p-6 mb-8 hover-lift">
+              <div className="sci-fi-border-enhanced backdrop-blur-sm p-6 mb-8 hover-lift">
                 <div className="font-mono text-sm mb-4">
                   <div className="text-gray-400">// Student Profile</div>
                   <div className="text-green-400">{'const student = {'}</div>

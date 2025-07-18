@@ -35,7 +35,7 @@ const Hero = () => {
       <div className="container mx-auto px-4 text-center">
         <div className="max-w-4xl mx-auto scroll-animate">
           {/* Terminal-style greeting */}
-          <div className="inline-block sci-fi-border backdrop-blur-sm p-4 mb-8 font-mono text-sm hover-lift">
+          <div className="inline-block sci-fi-border-enhanced backdrop-blur-sm p-4 mb-8 font-mono text-sm hover-lift">
             <div className="flex items-center space-x-2 mb-2">
               <Terminal className="h-4 w-4 text-green-400" />
               <span className="text-gray-400">arnab@dev-machine:~$</span>
