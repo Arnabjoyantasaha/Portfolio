@@ -46,7 +46,7 @@ const Skills = () => {
             {skillCategories.map((category, categoryIndex) => (
               <div
                 key={categoryIndex}
-                className="sci-fi-border-pulse backdrop-blur-sm p-6 hover:border-green-400/50 transition-all duration-300 hover-lift"
+                className="sci-fi-border backdrop-blur-sm p-6 hover:border-green-400/50 transition-all duration-300 hover-lift"
                 style={{ animationDelay: `${categoryIndex * 0.3}s` }}
               >
                 <h3 className="text-xl font-semibold text-white mb-6 text-center transition-all duration-300 hover:text-green-400">
@@ -73,7 +73,7 @@ const Skills = () => {
           </div>
 
           <div className="mt-12 text-center">
-            <div className="inline-block sci-fi-border-enhanced backdrop-blur-sm p-4 font-mono text-sm hover-lift animate-fade-in">
+            <div className="inline-block sci-fi-border backdrop-blur-sm p-4 font-mono text-sm hover-lift animate-fade-in">
               <div className="text-gray-400 mb-2">// Currently Learning</div>
               <div className="text-green-400">
                 const learning = [<span className="text-green-400">"GraphQL"</span>, <span className="text-green-400">"Kubernetes"</span>, <span className="text-green-400">"Machine Learning"</span>];

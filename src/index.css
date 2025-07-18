@@ -327,204 +327,35 @@ button, a, .interactive {
   position: relative;
   border: 1px solid transparent;
   background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
-  overflow: hidden;
 }
 
 .sci-fi-border::before {
   content: '';
   position: absolute;
-  inset: -2px;
+  inset: 0;
   padding: 1px;
-  background: linear-gradient(45deg, 
-    #00ff41 0%, 
-    transparent 25%, 
-    #00d4aa 50%, 
-    transparent 75%, 
-    #00ff41 100%);
+  background: linear-gradient(45deg, #00ff41, transparent, #00d4aa, transparent, #00ff41);
   border-radius: inherit;
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: xor;
   -webkit-mask-composite: xor;
-  animation: border-rotate 4s linear infinite;
-  z-index: -1;
-}
+  animation: border-rotate 3s linear infinite;
 }
 
-.sci-fi-border::after {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    #00ff41 25%, 
-    #00d4aa 50%, 
-    #00ff41 75%, 
-    transparent 100%);
-  border-radius: inherit;
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask-composite: xor;
-  -webkit-mask-composite: xor;
-  animation: border-rotate-reverse 3s linear infinite;
-  z-index: -1;
-}
 @keyframes border-rotate {
   0% {
-    transform: rotate(0deg);
-    background: linear-gradient(0deg, 
-      #00ff41 0%, 
-      transparent 25%, 
-      #00d4aa 50%, 
-      transparent 75%, 
-      #00ff41 100%);
+    background: linear-gradient(45deg, #00ff41, transparent, #00d4aa, transparent, #00ff41);
   }
   25% {
-    transform: rotate(90deg);
-    background: linear-gradient(90deg, 
-      #00d4aa 0%, 
-      transparent 25%, 
-      #00ff41 50%, 
-      transparent 75%, 
-      #00d4aa 100%);
+    background: linear-gradient(135deg, #00d4aa, transparent, #00ff41, transparent, #00d4aa);
   }
   50% {
-    transform: rotate(180deg);
-    background: linear-gradient(180deg, 
-      #00ff41 0%, 
-      transparent 25%, 
-      #00d4aa 50%, 
-      transparent 75%, 
-      #00ff41 100%);
+    background: linear-gradient(225deg, #00ff41, transparent, #00d4aa, transparent, #00ff41);
   }
   75% {
-    transform: rotate(270deg);
-    background: linear-gradient(270deg, 
-      #00d4aa 0%, 
-      transparent 25%, 
-      #00ff41 50%, 
-      transparent 75%, 
-      #00d4aa 100%);
+    background: linear-gradient(315deg, #00d4aa, transparent, #00ff41, transparent, #00d4aa);
   }
   100% {
-    transform: rotate(360deg);
-    background: linear-gradient(360deg, 
-@keyframes border-rotate-reverse {
-  0% {
-    transform: rotate(360deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
-}
-      #00ff41 0%, 
-/* Enhanced sci-fi border with zig-zag effect */
-.sci-fi-border-enhanced {
-  position: relative;
-  border: 1px solid transparent;
-  background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
-  overflow: hidden;
-}
-      transparent 25%, 
-.sci-fi-border-enhanced::before {
-  content: '';
-  position: absolute;
-  inset: -3px;
-  background: conic-gradient(
-    from 0deg,
-    #00ff41 0deg,
-    transparent 60deg,
-    #00d4aa 120deg,
-    transparent 180deg,
-    #00ff41 240deg,
-    transparent 300deg,
-    #00d4aa 360deg
-  );
-  border-radius: inherit;
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask-composite: xor;
-  -webkit-mask-composite: xor;
-  animation: zig-zag-rotate 6s linear infinite;
-  z-index: -1;
-}
-      #00d4aa 50%, 
-.sci-fi-border-enhanced::after {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  background: conic-gradient(
-    from 180deg,
-    transparent 0deg,
-    #00ff41 60deg,
-    transparent 120deg,
-    #00d4aa 180deg,
-    transparent 240deg,
-    #00ff41 300deg,
-    transparent 360deg
-  );
-  border-radius: inherit;
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask-composite: xor;
-  -webkit-mask-composite: xor;
-  animation: zig-zag-rotate-reverse 4s linear infinite;
-  z-index: -1;
-}
-      transparent 75%, 
-@keyframes zig-zag-rotate {
-  0% {
-    transform: rotate(0deg) scale(1);
-  }
-  50% {
-    transform: rotate(180deg) scale(1.02);
-  }
-  100% {
-    transform: rotate(360deg) scale(1);
-  }
-}
-      #00ff41 100%);
-@keyframes zig-zag-rotate-reverse {
-  0% {
-    transform: rotate(360deg) scale(1);
-  }
-  50% {
-    transform: rotate(180deg) scale(0.98);
-  }
-  100% {
-    transform: rotate(0deg) scale(1);
-  }
-}
-  }
-/* Pulsing border variant */
-.sci-fi-border-pulse {
-  position: relative;
-  border: 1px solid transparent;
-  background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
-  overflow: hidden;
-}
-}
-.sci-fi-border-pulse::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  background: linear-gradient(45deg, 
-    #00ff41 0%, 
-    #00d4aa 25%, 
-    #00ff41 50%, 
-    #00d4aa 75%, 
-    #00ff41 100%);
-  border-radius: inherit;
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask-composite: xor;
-  -webkit-mask-composite: xor;
-  animation: border-pulse 2s ease-in-out infinite;
-  z-index: -1;
-}
-  }
-@keyframes border-pulse {
-  0%, 100% {
-    opacity: 0.5;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.02);
+    background: linear-gradient(45deg, #00ff41, transparent, #00d4aa, transparent, #00ff41);
   }
 }
