@@ -35,20 +35,21 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="py-20">
+    <section id="skills" className="py-20 scroll-animate">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 neon-flicker">
             <span className="text-green-400">Skills</span> & Technologies
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 animate-slide-in-up">
             {skillCategories.map((category, categoryIndex) => (
               <div
                 key={categoryIndex}
-                className="terminal-border backdrop-blur-sm p-6 hover:border-green-400/50 transition-all duration-300 glow-on-hover"
+                className="sci-fi-border backdrop-blur-sm p-6 hover:border-green-400/50 transition-all duration-500 glow-on-hover hover-lift hologram-effect"
+                style={{ animationDelay: `${categoryIndex * 0.3}s` }}
               >
-                <h3 className="text-xl font-semibold text-white mb-6 text-center">
+                <h3 className="text-xl font-semibold text-white mb-6 text-center transition-all duration-300 hover:text-green-400">
                   {category.title}
                 </h3>
                 <div className="space-y-4">
@@ -60,7 +61,7 @@ const Skills = () => {
                       </div>
                       <div className="w-full bg-gray-800 rounded-full h-2">
                         <div
-                          className="bg-gradient-to-r from-green-500 to-emerald-500 h-2 rounded-full transition-all duration-1000 ease-out shadow-lg"
+                          className="bg-gradient-to-r from-green-500 to-emerald-500 h-2 rounded-full transition-all duration-1500 ease-out shadow-lg animate-pulse-glow"
                           style={{ width: `${skill.level}%` }}
                         ></div>
                       </div>
@@ -72,7 +73,7 @@ const Skills = () => {
           </div>
 
           <div className="mt-12 text-center">
-            <div className="inline-block code-block backdrop-blur-sm p-4 font-mono text-sm">
+            <div className="inline-block sci-fi-border backdrop-blur-sm p-4 font-mono text-sm hover-lift hologram-effect animate-fade-in">
               <div className="text-gray-400 mb-2">// Currently Learning</div>
               <div className="text-green-400">
                 const learning = [<span className="text-green-400">"GraphQL"</span>, <span className="text-green-400">"Kubernetes"</span>, <span className="text-green-400">"Machine Learning"</span>];

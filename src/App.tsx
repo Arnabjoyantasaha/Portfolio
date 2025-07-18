@@ -6,11 +6,13 @@ import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import BackgroundPattern from './components/BackgroundPattern';
+import SmoothScroll from './components/SmoothScroll';
 
 function App() {
   return (
     <div className="min-h-screen bg-black text-white relative overflow-x-hidden font-mono">
       <BackgroundPattern />
+      <SmoothScroll />
       <Header />
       <main className="relative z-10">
         <Hero />

@@ -64,16 +64,16 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20">
+    <section id="contact" className="py-20 scroll-animate">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 neon-flicker">
             Get In <span className="text-green-400">Touch</span>
           </h2>
 
           <div className="grid md:grid-cols-2 gap-12">
-            <div>
-              <div className="code-block backdrop-blur-sm p-6 mb-8">
+            <div className="animate-slide-in-left">
+              <div className="sci-fi-border backdrop-blur-sm p-6 mb-8 hover-lift hologram-effect">
                 <div className="font-mono text-sm mb-4">
                   <div className="text-gray-400">// Let's connect!</div>
                   <div className="text-green-400">{'function getInTouch() {'}</div>
@@ -94,10 +94,10 @@ const Contact = () => {
                   <a
                     key={index}
                     href={item.href}
-                    className="flex items-center space-x-4 text-gray-300 hover:text-green-400 transition-colors duration-200 group"
+                    className="flex items-center space-x-4 text-gray-300 hover:text-green-400 transition-all duration-300 group hover:scale-105 hover:translate-x-2"
                   >
-                    <div className="terminal-border p-3 group-hover:border-green-400/50 transition-all duration-300">
-                      <item.icon className="h-5 w-5" />
+                    <div className="sci-fi-border p-3 group-hover:border-green-400/50 transition-all duration-300 hover-lift">
+                      <item.icon className="h-5 w-5 transition-all duration-300 group-hover:rotate-12" />
                     </div>
                     <div>
                       <div className="text-sm text-gray-400 font-mono">{item.label}</div>
@@ -112,16 +112,16 @@ const Contact = () => {
                   <a
                     key={index}
                     href={social.href}
-                    className="terminal-border p-3 hover:border-green-400/50 hover:bg-green-400/10 transition-all duration-300 transform hover:scale-110"
+                    className="sci-fi-border p-3 hover:border-green-400/50 hover:bg-green-400/10 transition-all duration-300 transform hover:scale-125 hover:rotate-12 glow-on-hover"
                     aria-label={social.label}
                   >
-                    <social.icon className="h-5 w-5 text-gray-400 hover:text-green-400 transition-colors duration-200" />
+                    <social.icon className="h-5 w-5 text-gray-400 hover:text-green-400 transition-all duration-300" />
                   </a>
                 ))}
               </div>
             </div>
 
-            <div className="terminal-border backdrop-blur-sm p-6">
+            <div className="sci-fi-border backdrop-blur-sm p-6 hover-lift hologram-effect animate-slide-in-right">
               <form 
                 name="contact" 
                 method="POST" 
@@ -143,7 +143,7 @@ const Contact = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full bg-black border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-green-400 focus:ring-1 focus:ring-green-400 transition-all duration-200 font-mono"
+                    className="w-full bg-black border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-green-400 focus:ring-2 focus:ring-green-400/50 transition-all duration-300 font-mono hover:border-green-400/50"
                     placeholder="Your name"
                     required
                   />
@@ -159,7 +159,7 @@ const Contact = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full bg-black border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-green-400 focus:ring-1 focus:ring-green-400 transition-all duration-200 font-mono"
+                    className="w-full bg-black border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-green-400 focus:ring-2 focus:ring-green-400/50 transition-all duration-300 font-mono hover:border-green-400/50"
                     placeholder="your.email@example.com"
                     required
                   />
@@ -175,7 +175,7 @@ const Contact = () => {
                     value={formData.message}
                     onChange={handleChange}
                     rows={5}
-                    className="w-full bg-black border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-green-400 focus:ring-1 focus:ring-green-400 transition-all duration-200 resize-none font-mono"
+                    className="w-full bg-black border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-green-400 focus:ring-2 focus:ring-green-400/50 transition-all duration-300 resize-none font-mono hover:border-green-400/50"
                     placeholder="Tell me about your project or just say hi!"
                     required
                   />
@@ -184,13 +184,13 @@ const Contact = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-full font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 ${
+                  className={`w-full font-semibold py-3 px-6 rounded-lg transition-all duration-500 transform hover:scale-110 hover:rotate-1 flex items-center justify-center space-x-2 animate-pulse-glow hover-lift ${
                     isSubmitting 
                       ? 'bg-gray-600 cursor-not-allowed' 
                       : 'bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600'
                   } text-black font-mono`}
                 >
-                  <Send size={18} />
+                  <Send size={18} className="transition-all duration-300 hover:rotate-12" />
                   <span>{isSubmitting ? 'Sending...' : './send_message.sh'}</span>
                 </button>
 
