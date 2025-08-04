@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronDown, Github, Linkedin, Mail, Terminal, Code2, Cpu, Database } from 'lucide-react';
+import { ChevronDown, Github, Linkedin, Mail, Terminal } from 'lucide-react';
 
 const Hero = () => {
   const scrollToSection = (sectionId: string) => {
@@ -31,115 +31,89 @@ const Hero = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative pt-16 overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900">
+    <section className="min-h-screen flex items-center justify-center relative pt-16 overflow-hidden">
       <div className="container mx-auto px-4 text-center">
-        <div className="max-w-5xl mx-auto scroll-animate">
+        <div className="max-w-4xl mx-auto scroll-animate">
           {/* Terminal-style greeting */}
-          <div className="inline-block tech-border-animated p-6 mb-12 font-mono text-sm professional-hover animate-professional-fade-in">
+          <div className="inline-block sci-fi-border backdrop-blur-sm p-4 mb-8 font-mono text-sm hover-lift">
             <div className="flex items-center space-x-2 mb-2">
-              <Terminal className="h-5 w-5 text-indigo-400" />
-              <span className="text-gray-400">arnab@tech-workspace:~$</span>
-              <span className="text-indigo-400">whoami</span>
+              <Terminal className="h-4 w-4 text-green-400" />
+              <span className="text-gray-400">arnab@dev-machine:~$</span>
+              <span className="text-green-400">whoami</span>
             </div>
-            <div className="text-indigo-400">Computer Science Engineer & Full-Stack Developer</div>
+            <div className="text-green-400">CSE Student & Future Software Developer</div>
             <div className="flex items-center space-x-2 mt-2">
-              <span className="text-gray-400">arnab@tech-workspace:~$</span>
-              <span className="text-indigo-400">cat expertise.json</span>
+              <span className="text-gray-400">arnab@dev-machine:~$</span>
+              <span className="text-green-400">cat skills.txt</span>
             </div>
-            <div className="text-purple-400">{"{ \"languages\": [\"JavaScript\", \"TypeScript\", \"Python\", \"Java\"], \"frameworks\": [\"React\", \"Node.js\", \"Next.js\"] }"}</div>
+            <div className="text-yellow-400">JavaScript | Python | Java | C++ | React</div>
           </div>
 
-          <h1 className="text-6xl md:text-8xl font-bold mb-8 animate-professional-slide-up">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-slide-in-up">
             <span className="text-white">Hi, I'm </span>
-            <span className="tech-gradient">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-500">
               Arnab Joyanta Saha
             </span>
           </h1>
 
-          <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed animate-professional-slide-left">
-            <span className="text-indigo-400 font-mono">{'// '}</span>
-            Passionate Computer Science Engineer crafting innovative digital solutions with modern technologies. 
-            I transform complex problems into elegant, scalable applications that make a difference.
+          <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed font-mono animate-slide-in-left">
+            <span className="text-green-400">{'// '}</span>
+            Computer Science Engineering student passionate about building innovative solutions 
+            and exploring the frontiers of technology.
           </p>
 
-          {/* Tech passion indicators */}
-          <div className="flex justify-center space-x-8 mb-12 animate-professional-slide-right">
-            <div className="flex flex-col items-center space-y-2 professional-hover">
-              <Code2 className="h-8 w-8 text-indigo-400 animate-subtle-float" />
-              <span className="text-sm text-gray-400 font-mono">Clean Code</span>
-            </div>
-            <div className="flex flex-col items-center space-y-2 professional-hover" style={{ animationDelay: '0.2s' }}>
-              <Cpu className="h-8 w-8 text-purple-400 animate-subtle-float" />
-              <span className="text-sm text-gray-400 font-mono">Performance</span>
-            </div>
-            <div className="flex flex-col items-center space-y-2 professional-hover" style={{ animationDelay: '0.4s' }}>
-              <Database className="h-8 w-8 text-pink-400 animate-subtle-float" />
-              <span className="text-sm text-gray-400 font-mono">Scalability</span>
-            </div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16 animate-professional-fade-in">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 animate-slide-in-right">
             <button
               onClick={() => scrollToSection('projects')}
-              className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold py-4 px-8 rounded-lg button-tech-hover professional-shadow font-mono"
+              className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-black font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-green-500/25 font-mono"
             >
-              <span className="flex items-center space-x-2">
-                <Code2 className="h-5 w-5" />
-                <span>View My Work</span>
-              </span>
+              ./view_projects.sh
             </button>
             <button
               onClick={() => scrollToSection('game')}
-              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold py-4 px-8 rounded-lg button-tech-hover professional-shadow font-mono"
+              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-purple-500/25 font-mono"
             >
-              <span className="flex items-center space-x-2">
-                <Cpu className="h-5 w-5" />
-                <span>Play Game</span>
-              </span>
+              ./play_game.sh
             </button>
             <button
               onClick={() => scrollToSection('contact')}
-              className="border-2 border-indigo-400 text-indigo-400 hover:bg-indigo-400 hover:text-white font-semibold py-4 px-8 rounded-lg button-tech-hover backdrop-blur-sm font-mono"
+              className="border border-green-400 text-green-400 hover:bg-green-400 hover:text-black font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 backdrop-blur-sm font-mono"
             >
-              <span className="flex items-center space-x-2">
-                <Mail className="h-5 w-5" />
-                <span>Let's Connect</span>
-              </span>
+              ./contact.sh
             </button>
           </div>
 
-          <div className="flex justify-center space-x-8 animate-professional-fade-in">
-            <a href="https://github.com/Arnabjoyantasaha" className="text-gray-400 hover:text-indigo-400 professional-hover">
-              <Github size={28} />
+          <div className="flex justify-center space-x-6 animate-fade-in">
+            <a href="https://github.com/Arnabjoyantasaha" className="text-gray-400 hover:text-green-400 transition-all duration-300 transform hover:scale-110">
+              <Github size={24} />
             </a>
-            <a href="https://www.linkedin.com/in/arnab-joyanta-saha-3b2435301" className="text-gray-400 hover:text-indigo-400 professional-hover">
-              <Linkedin size={28} />
+            <a href="https://www.linkedin.com/in/arnab-joyanta-saha-3b2435301" className="text-gray-400 hover:text-green-400 transition-all duration-300 transform hover:scale-110">
+              <Linkedin size={24} />
             </a>
-            <a href="mailto:arnabjoyantasaha@gmail.com" className="text-gray-400 hover:text-indigo-400 professional-hover">
-              <Mail size={28} />
+            <a href="mailto:arnabjoyantasaha@gmail.com" className="text-gray-400 hover:text-green-400 transition-all duration-300 transform hover:scale-110">
+              <Mail size={24} />
             </a>
           </div>
         </div>
 
         <button
           onClick={() => scrollToSection('about')}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-gray-400 hover:text-indigo-400 professional-hover animate-subtle-float"
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-gray-400 hover:text-green-400 transition-all duration-300 animate-bounce hover:scale-110"
         >
           <ChevronDown size={32} />
         </button>
       </div>
       
-      {/* Subtle tech particles */}
+      {/* Data streams for sci-fi effect */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {[...Array(8)].map((_, i) => (
+        {[...Array(5)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-1 h-1 bg-indigo-400/30 rounded-full animate-subtle-float"
+            className="absolute w-px h-20 bg-gradient-to-b from-transparent via-green-400 to-transparent data-stream"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 4}s`,
-              animationDuration: `${4 + Math.random() * 2}s`
+              left: `${20 + i * 20}%`,
+              animationDelay: `${i * 0.8}s`,
+              animationDuration: `${3 + i * 0.5}s`
             }}
           />
         ))}
