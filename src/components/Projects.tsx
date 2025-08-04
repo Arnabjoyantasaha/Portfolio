@@ -4,22 +4,40 @@ import { ExternalLink, Github, Code, Database, Globe } from 'lucide-react';
 const Projects = () => {
   const projects = [
     {
-      title: 'Library Management System',
-      description: 'A comprehensive library management system built in C programming language. Features include book cataloging, member registration, issue/return tracking, and fine calculation.',
-      tech: ['C Programming', 'File Handling', 'Data Structures', 'Algorithms'],
-      github: 'https://github.com',
-      demo: 'https://example.com',
-      image: 'https://images.pexels.com/photos/481516/pexels-photo-481516.jpeg?auto=compress&cs=tinysrgb&w=800',
+      title: 'E-Commerce Platform',
+      description: 'Full-stack e-commerce solution with React frontend, Node.js backend, and MongoDB database. Features include user authentication, payment integration, inventory management, and admin dashboard.',
+      tech: ['React', 'Node.js', 'MongoDB', 'Stripe API', 'JWT'],
+      github: 'https://github.com/Arnabjoyantasaha',
+      demo: 'https://arnabjoyantasaha.netlify.app',
+      image: 'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800',
+      icon: Globe
+    },
+    {
+      title: 'AI Chat Application',
+      description: 'Real-time chat application with AI integration using OpenAI API. Features include intelligent responses, conversation history, user authentication, and responsive design.',
+      tech: ['React', 'Socket.io', 'OpenAI API', 'Express.js', 'MongoDB'],
+      github: 'https://github.com/Arnabjoyantasaha',
+      demo: 'https://arnabjoyantasaha.netlify.app',
+      image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
       icon: Database
     },
     {
-      title: 'Gym Management System',
-      description: 'Object-oriented gym management system developed in Java. Includes member management, trainer scheduling, equipment tracking, and membership billing with OOP principles.',
-      tech: ['Java', 'OOP', 'Inheritance', 'Polymorphism'],
-      github: 'https://github.com',
-      demo: 'https://example.com',
-      image: 'https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=800',
+      title: 'Task Management Dashboard',
+      description: 'Professional project management tool with drag-and-drop functionality, team collaboration features, real-time updates, and comprehensive analytics dashboard.',
+      tech: ['TypeScript', 'React', 'Firebase', 'Material-UI', 'Chart.js'],
+      github: 'https://github.com/Arnabjoyantasaha',
+      demo: 'https://arnabjoyantasaha.netlify.app',
+      image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800',
       icon: Code
+    },
+    {
+      title: 'Weather Analytics Platform',
+      description: 'Data visualization platform that aggregates weather data from multiple APIs, provides predictive analytics, and offers interactive charts with historical data comparison.',
+      tech: ['Python', 'Django', 'D3.js', 'PostgreSQL', 'REST API'],
+      github: 'https://github.com/Arnabjoyantasaha',
+      demo: 'https://arnabjoyantasaha.netlify.app',
+      image: 'https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg?auto=compress&cs=tinysrgb&w=800',
+      icon: Database
     }
   ];
 

@@ -359,3 +359,9 @@ button, a, .interactive {
     background: linear-gradient(45deg, #00ff41, transparent, #00d4aa, transparent, #00ff41);
   }
 }
+
+/* 3D Perspective for computer animation */
+.perspective-1000 {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}

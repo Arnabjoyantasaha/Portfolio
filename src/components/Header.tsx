@@ -62,7 +62,7 @@ const Header = () => {
           </div>
 
           <nav className="hidden md:flex space-x-8">
-            {['about', 'skills', 'projects', 'contact'].map((item) => (
+            {['about', 'skills', 'projects', 'game', 'contact'].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
@@ -87,7 +87,7 @@ const Header = () => {
           isMenuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
         } overflow-hidden`}>
           <nav className="pt-4 pb-2 space-y-2">
-            {['about', 'skills', 'projects', 'contact'].map((item) => (
+            {['about', 'skills', 'projects', 'game', 'contact'].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}

@@ -85,8 +85,8 @@ const Contact = () => {
               </div>
 
               <p className="text-gray-300 text-lg leading-relaxed mb-8">
-                I'm always open to discussing new opportunities, innovative projects, 
-                or just having a chat about technology. Feel free to reach out!
+                I'm actively seeking opportunities in software development, full-stack engineering, 
+                and AI/ML roles. Let's discuss how I can contribute to your team's success!
               </p>
 
               <div className="space-y-4 mb-8">

@@ -65,13 +65,19 @@ const Hero = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 animate-slide-in-right">
             <button
               onClick={() => scrollToSection('projects')}
-              className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-black font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-green-500/25 font-mono hover-lift"
+              className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-black font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-green-500/25 font-mono"
             >
               ./view_projects.sh
             </button>
             <button
+              onClick={() => scrollToSection('game')}
+              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-purple-500/25 font-mono"
+            >
+              ./play_game.sh
+            </button>
+            <button
               onClick={() => scrollToSection('contact')}
-              className="border border-green-400 text-green-400 hover:bg-green-400 hover:text-black font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 backdrop-blur-sm font-mono hover-lift"
+              className="border border-green-400 text-green-400 hover:bg-green-400 hover:text-black font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 backdrop-blur-sm font-mono"
             >
               ./contact.sh
             </button>

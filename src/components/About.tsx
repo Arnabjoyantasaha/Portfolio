@@ -36,15 +36,16 @@ const About = () => {
               </div>
 
               <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                I'm a 5th semester BSc in Computer Science Engineering student at Daffodil International University with a passion for creating 
-                innovative solutions and exploring cutting-edge technologies. My journey in tech 
-                began with curiosity about how things work and evolved into a deep appreciation 
-                for elegant code and user-centered design.
+                I'm a dedicated Computer Science Engineering student at Daffodil International University with a passion for creating 
+                innovative solutions and exploring cutting-edge technologies. My expertise spans full-stack development, 
+                AI implementation, and system design. I combine technical proficiency with creative problem-solving 
+                to build scalable, user-centered applications.
               </p>
 
               <p className="text-gray-300 text-lg leading-relaxed">
-                When I'm not coding, you can find me contributing to open-source projects, 
-                participating in hackathons, or exploring the latest trends in AI and web development.
+                I actively contribute to open-source projects, participate in competitive programming, 
+                and stay current with emerging technologies. My goal is to leverage technology 
+                to solve real-world problems and create meaningful digital experiences.
               </p>
             </div>
 

@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
+import Game from './components/Game';
 import Contact from './components/Contact';
 import BackgroundPattern from './components/BackgroundPattern';
 import SmoothScroll from './components/SmoothScroll';
@@ -39,6 +40,7 @@ function App() {
           <About />
           <Skills />
           <Projects />
+          <Game />
           <Contact />
         </div>
       </main>
