@@ -154,19 +154,19 @@ const Game = () => {
   };
 
   return (
-    <section id="game" className="py-20 scroll-animate">
+    <section id="game" className="py-24 bg-gradient-to-b from-slate-900 to-slate-800 scroll-animate">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
-            <span className="text-green-400">Play Game</span> With Me
+          <h2 className="text-5xl md:text-6xl font-bold text-center mb-6">
+            <span className="text-white">Challenge My</span> <span className="tech-gradient">AI</span>
           </h2>
-          <p className="text-center text-gray-400 mb-12 font-mono">
-            Challenge my AI in a classic game of Tic Tac Toe
+          <p className="text-center text-gray-300 text-xl mb-16">
+            Test your strategy against my intelligent Tic Tac Toe AI algorithm
           </p>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* 3D Computer Animation */}
-            <div className="flex justify-center animate-slide-in-left">
+            <div className="flex justify-center animate-professional-slide-left">
               <div 
                 ref={computerRef}
                 className="relative perspective-1000"
@@ -175,60 +175,60 @@ const Game = () => {
                   transition: 'transform 0.1s ease-out'
                 }}
               >
-                <div className="w-80 h-60 bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg shadow-2xl border border-green-400/30 relative overflow-hidden">
+                <div className="w-80 h-60 bg-gradient-to-br from-slate-800 to-slate-900 rounded-lg professional-shadow border border-indigo-400/30 relative overflow-hidden">
                   {/* Screen */}
-                  <div className="absolute inset-4 bg-black rounded border border-green-400/50 overflow-hidden">
-                    <div className="w-full h-full bg-gradient-to-br from-green-900/20 to-black relative">
+                  <div className="absolute inset-4 bg-black rounded border border-indigo-400/50 overflow-hidden">
+                    <div className="w-full h-full bg-gradient-to-br from-indigo-900/20 to-black relative">
                       {/* Terminal-like display */}
-                      <div className="p-4 font-mono text-xs">
-                        <div className="text-green-400 mb-2">$ ./tic_tac_toe.exe</div>
+                      <div className="p-4 font-mono text-sm">
+                        <div className="text-indigo-400 mb-2">$ ./ai_game_engine.exe</div>
                         <div className="text-gray-300 mb-1">Initializing AI opponent...</div>
-                        <div className="text-yellow-400 mb-1">Difficulty: {gameMode.toUpperCase()}</div>
-                        <div className="text-blue-400">Ready to play!</div>
-                        <div className="mt-4 text-green-400 animate-pulse">{'>'} Waiting for your move...</div>
+                        <div className="text-purple-400 mb-1">Mode: {gameMode.toUpperCase()}</div>
+                        <div className="text-cyan-400">AI Status: READY</div>
+                        <div className="mt-4 text-indigo-400 animate-tech-pulse">{'>'} Your turn...</div>
                       </div>
                       
                       {/* Animated cursor */}
-                      <div className="absolute bottom-4 right-4 w-2 h-4 bg-green-400 animate-pulse"></div>
+                      <div className="absolute bottom-4 right-4 w-2 h-4 bg-indigo-400 animate-tech-pulse"></div>
                     </div>
                   </div>
                   
                   {/* Keyboard */}
-                  <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-72 h-4 bg-gray-700 rounded-b-lg border-t border-green-400/30">
+                  <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-72 h-4 bg-slate-700 rounded-b-lg border-t border-indigo-400/30">
                     <div className="flex justify-center space-x-1 pt-1">
                       {[...Array(12)].map((_, i) => (
-                        <div key={i} className="w-4 h-2 bg-gray-600 rounded-sm"></div>
+                        <div key={i} className="w-4 h-2 bg-slate-600 rounded-sm"></div>
                       ))}
                     </div>
                   </div>
                   
                   {/* Stand */}
-                  <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-20 h-8 bg-gray-700 rounded-b-lg"></div>
+                  <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-20 h-8 bg-slate-700 rounded-b-lg"></div>
                 </div>
               </div>
             </div>
 
             {/* Game Board */}
-            <div className="animate-slide-in-right">
+            <div className="animate-professional-slide-right">
               {/* Game Controls */}
-              <div className="flex justify-between items-center mb-6">
-                <div className="flex space-x-4">
+              <div className="flex justify-between items-center mb-8">
+                <div className="flex space-x-6">
                   <button
                     onClick={() => setGameMode('easy')}
-                    className={`px-4 py-2 rounded-lg font-mono text-sm transition-all duration-300 ${
+                    className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
                       gameMode === 'easy' 
-                        ? 'bg-green-500 text-black' 
-                        : 'border border-green-400 text-green-400 hover:bg-green-400 hover:text-black'
+                        ? 'bg-gradient-to-r from-green-500 to-green-600 text-white professional-shadow' 
+                        : 'border-2 border-green-400 text-green-400 hover:bg-green-400 hover:text-white'
                     }`}
                   >
                     Easy
                   </button>
                   <button
                     onClick={() => setGameMode('hard')}
-                    className={`px-4 py-2 rounded-lg font-mono text-sm transition-all duration-300 ${
+                    className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
                       gameMode === 'hard' 
-                        ? 'bg-red-500 text-black' 
-                        : 'border border-red-400 text-red-400 hover:bg-red-400 hover:text-black'
+                        ? 'bg-gradient-to-r from-red-500 to-red-600 text-white professional-shadow' 
+                        : 'border-2 border-red-400 text-red-400 hover:bg-red-400 hover:text-white'
                     }`}
                   >
                     Hard
@@ -238,7 +238,7 @@ const Game = () => {
                 <div className="flex space-x-2">
                   <button
                     onClick={resetGame}
-                    className="p-2 border border-gray-600 text-gray-400 hover:text-green-400 hover:border-green-400 rounded-lg transition-all duration-300"
+                    className="p-3 border-2 border-gray-600 text-gray-400 hover:text-indigo-400 hover:border-indigo-400 rounded-lg professional-hover"
                   >
                     <RotateCcw size={18} />
                   </button>
@@ -246,47 +246,47 @@ const Game = () => {
               </div>
 
               {/* Score Board */}
-              <div className="grid grid-cols-3 gap-4 mb-6">
-                <div className="sci-fi-border backdrop-blur-sm p-3 text-center">
-                  <User className="h-5 w-5 text-blue-400 mx-auto mb-1" />
-                  <div className="text-sm text-gray-400 font-mono">You</div>
-                  <div className="text-xl font-bold text-blue-400">{score.player}</div>
+              <div className="grid grid-cols-3 gap-6 mb-8">
+                <div className="tech-border-animated p-6 text-center professional-hover">
+                  <User className="h-8 w-8 text-blue-400 mx-auto mb-2" />
+                  <div className="text-sm text-gray-400 font-semibold">Player</div>
+                  <div className="text-3xl font-bold text-blue-400">{score.player}</div>
                 </div>
-                <div className="sci-fi-border backdrop-blur-sm p-3 text-center">
-                  <Trophy className="h-5 w-5 text-yellow-400 mx-auto mb-1" />
-                  <div className="text-sm text-gray-400 font-mono">Ties</div>
-                  <div className="text-xl font-bold text-yellow-400">{score.ties}</div>
+                <div className="tech-border-animated p-6 text-center professional-hover">
+                  <Trophy className="h-8 w-8 text-yellow-400 mx-auto mb-2" />
+                  <div className="text-sm text-gray-400 font-semibold">Draws</div>
+                  <div className="text-3xl font-bold text-yellow-400">{score.ties}</div>
                 </div>
-                <div className="sci-fi-border backdrop-blur-sm p-3 text-center">
-                  <Cpu className="h-5 w-5 text-red-400 mx-auto mb-1" />
-                  <div className="text-sm text-gray-400 font-mono">AI</div>
-                  <div className="text-xl font-bold text-red-400">{score.ai}</div>
+                <div className="tech-border-animated p-6 text-center professional-hover">
+                  <Cpu className="h-8 w-8 text-red-400 mx-auto mb-2" />
+                  <div className="text-sm text-gray-400 font-semibold">AI</div>
+                  <div className="text-3xl font-bold text-red-400">{score.ai}</div>
                 </div>
               </div>
 
               {/* Game Status */}
-              <div className="text-center mb-6">
+              <div className="text-center mb-8">
                 {winner ? (
-                  <div className="sci-fi-border backdrop-blur-sm p-4">
-                    <div className="text-2xl font-bold mb-2">
+                  <div className="tech-border-animated p-8">
+                    <div className="text-3xl font-bold mb-4">
                       {winner === 'X' && <span className="text-blue-400">You Win! 🎉</span>}
                       {winner === 'O' && <span className="text-red-400">AI Wins! 🤖</span>}
                       {winner === 'tie' && <span className="text-yellow-400">It's a Tie! 🤝</span>}
                     </div>
                     <button
                       onClick={resetGame}
-                      className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-black font-semibold py-2 px-6 rounded-lg transition-all duration-300 font-mono"
+                      className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-3 px-8 rounded-lg button-tech-hover professional-shadow"
                     >
                       Play Again
                     </button>
                   </div>
                 ) : (
-                  <div className="sci-fi-border backdrop-blur-sm p-4">
-                    <div className="text-lg font-mono">
+                  <div className="tech-border-animated p-6">
+                    <div className="text-xl font-semibold">
                       {isPlayerTurn ? (
                         <span className="text-blue-400">Your Turn (X)</span>
                       ) : (
-                        <span className="text-red-400">AI Thinking... 🤔</span>
+                        <span className="text-red-400 animate-tech-pulse">AI Processing... 🤔</span>
                       )}
                     </div>
                   </div>
@@ -294,12 +294,12 @@ const Game = () => {
               </div>
 
               {/* Tic Tac Toe Board */}
-              <div className="grid grid-cols-3 gap-2 max-w-xs mx-auto mb-6">
+              <div className="grid grid-cols-3 gap-4 max-w-sm mx-auto mb-8">
                 {board.map((cell, index) => (
                   <button
                     key={index}
                     onClick={() => handleCellClick(index)}
-                    className="w-20 h-20 sci-fi-border backdrop-blur-sm flex items-center justify-center text-3xl font-bold transition-all duration-300 hover:border-green-400/50 hover:scale-105"
+                    className="w-24 h-24 tech-border-animated flex items-center justify-center text-4xl font-bold professional-hover hover:border-indigo-400/50"
                     disabled={!!cell || !!winner || !isPlayerTurn}
                   >
                     {cell === 'X' && <span className="text-blue-400">X</span>}
@@ -312,7 +312,7 @@ const Game = () => {
               <div className="text-center">
                 <button
                   onClick={resetScore}
-                  className="border border-gray-600 text-gray-400 hover:text-red-400 hover:border-red-400 font-semibold py-2 px-6 rounded-lg transition-all duration-300 font-mono"
+                  className="border-2 border-gray-600 text-gray-400 hover:text-red-400 hover:border-red-400 font-semibold py-3 px-8 rounded-lg professional-hover"
                 >
                   Reset Score
                 </button>

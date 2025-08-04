@@ -1,103 +1,110 @@
 import React from 'react';
-import { ExternalLink, Github, Code, Database, Globe } from 'lucide-react';
+import { ExternalLink, Github, Code2, Database, Globe, Zap } from 'lucide-react';
 
 const Projects = () => {
   const projects = [
     {
-      title: 'E-Commerce Platform',
-      description: 'Full-stack e-commerce solution with React frontend, Node.js backend, and MongoDB database. Features include user authentication, payment integration, inventory management, and admin dashboard.',
-      tech: ['React', 'Node.js', 'MongoDB', 'Stripe API', 'JWT'],
+      title: 'Enterprise E-Commerce Platform',
+      description: 'Comprehensive e-commerce solution featuring advanced user authentication, secure payment processing, real-time inventory management, and analytics dashboard. Built with modern architecture and scalable design patterns.',
+      tech: ['React', 'TypeScript', 'Node.js', 'MongoDB', 'Stripe API', 'JWT'],
       github: 'https://github.com/Arnabjoyantasaha',
       demo: 'https://arnabjoyantasaha.netlify.app',
       image: 'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800',
-      icon: Globe
+      icon: Globe,
+      gradient: 'from-blue-500 to-purple-600'
     },
     {
-      title: 'AI Chat Application',
-      description: 'Real-time chat application with AI integration using OpenAI API. Features include intelligent responses, conversation history, user authentication, and responsive design.',
-      tech: ['React', 'Socket.io', 'OpenAI API', 'Express.js', 'MongoDB'],
+      title: 'Intelligent Chat Application',
+      description: 'Advanced real-time messaging platform with AI-powered responses, natural language processing, conversation analytics, and seamless user experience. Demonstrates expertise in modern web technologies and AI integration.',
+      tech: ['React', 'Socket.io', 'OpenAI API', 'Express.js', 'Redis', 'MongoDB'],
       github: 'https://github.com/Arnabjoyantasaha',
       demo: 'https://arnabjoyantasaha.netlify.app',
       image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
-      icon: Database
+      icon: Zap,
+      gradient: 'from-green-500 to-teal-600'
     },
     {
-      title: 'Task Management Dashboard',
-      description: 'Professional project management tool with drag-and-drop functionality, team collaboration features, real-time updates, and comprehensive analytics dashboard.',
-      tech: ['TypeScript', 'React', 'Firebase', 'Material-UI', 'Chart.js'],
+      title: 'Professional Task Management System',
+      description: 'Enterprise-grade project management platform featuring intuitive drag-and-drop interfaces, team collaboration tools, real-time synchronization, and comprehensive analytics. Optimized for productivity and scalability.',
+      tech: ['TypeScript', 'React', 'Firebase', 'Material-UI', 'Chart.js', 'WebSocket'],
       github: 'https://github.com/Arnabjoyantasaha',
       demo: 'https://arnabjoyantasaha.netlify.app',
       image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800',
-      icon: Code
+      icon: Code2,
+      gradient: 'from-purple-500 to-pink-600'
     },
     {
-      title: 'Weather Analytics Platform',
-      description: 'Data visualization platform that aggregates weather data from multiple APIs, provides predictive analytics, and offers interactive charts with historical data comparison.',
-      tech: ['Python', 'Django', 'D3.js', 'PostgreSQL', 'REST API'],
+      title: 'Advanced Weather Analytics Platform',
+      description: 'Sophisticated data visualization platform aggregating meteorological data from multiple sources, featuring predictive analytics, machine learning models, and interactive dashboards for comprehensive weather insights.',
+      tech: ['Python', 'Django', 'D3.js', 'PostgreSQL', 'TensorFlow', 'REST API'],
       github: 'https://github.com/Arnabjoyantasaha',
       demo: 'https://arnabjoyantasaha.netlify.app',
       image: 'https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg?auto=compress&cs=tinysrgb&w=800',
-      icon: Database
+      icon: Database,
+      gradient: 'from-orange-500 to-red-600'
     }
   ];
 
   return (
-    <section id="projects" className="py-20 bg-black scroll-animate">
+    <section id="projects" className="py-24 bg-gradient-to-b from-slate-900 to-slate-800 scroll-animate">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
-            My <span className="text-green-400">Projects</span>
+          <h2 className="text-5xl md:text-6xl font-bold text-center mb-16">
+            <span className="text-white">Featured</span> <span className="tech-gradient">Projects</span>
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto animate-slide-in-up">
+          <div className="grid lg:grid-cols-2 gap-12 animate-professional-slide-up">
             {projects.map((project, index) => (
               <div
                 key={index}
-                className="sci-fi-border backdrop-blur-sm overflow-hidden hover:border-green-400/50 transition-all duration-300 transform hover:scale-105 group hover-lift"
+                className="tech-border-animated overflow-hidden tech-card-hover group"
                 style={{ animationDelay: `${index * 0.3}s` }}
               >
                 <div className="relative overflow-hidden">
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+                    className="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-black/90 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
-                    <project.icon className="h-16 w-16 text-green-400" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-black/80 to-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
+                    <project.icon className="h-20 w-20 text-white animate-tech-pulse" />
+                  </div>
+                  <div className={`absolute top-4 right-4 px-3 py-1 rounded-full bg-gradient-to-r ${project.gradient} text-white text-xs font-bold`}>
+                    FEATURED
                   </div>
                 </div>
 
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-white mb-3 font-mono">{project.title}</h3>
-                  <p className="text-gray-300 mb-4 text-sm leading-relaxed">
+                <div className="p-8">
+                  <h3 className="text-2xl font-bold text-white mb-4">{project.title}</h3>
+                  <p className="text-gray-300 mb-6 leading-relaxed">
                     {project.description}
                   </p>
 
-                  <div className="flex flex-wrap gap-2 mb-4">
+                  <div className="flex flex-wrap gap-3 mb-6">
                     {project.tech.map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="bg-gray-800 text-green-400 px-3 py-1 rounded-full text-xs font-medium font-mono border border-green-400/30"
+                        className="bg-indigo-500/20 text-indigo-300 px-3 py-1 rounded-full text-sm font-medium border border-indigo-400/30"
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
 
-                  <div className="flex space-x-4">
+                  <div className="flex space-x-6">
                     <a
                       href={project.github}
-                      className="flex items-center space-x-2 text-gray-400 hover:text-green-400 transition-all duration-300 font-mono hover:scale-105"
+                      className="flex items-center space-x-2 text-gray-400 hover:text-indigo-400 professional-hover font-medium"
                     >
-                      <Github size={18} />
-                      <span className="text-sm">Code</span>
+                      <Github size={20} />
+                      <span>Source Code</span>
                     </a>
                     <a
                       href={project.demo}
-                      className="flex items-center space-x-2 text-gray-400 hover:text-green-400 transition-all duration-300 font-mono hover:scale-105"
+                      className="flex items-center space-x-2 text-gray-400 hover:text-indigo-400 professional-hover font-medium"
                     >
-                      <ExternalLink size={18} />
-                      <span className="text-sm">Demo</span>
+                      <ExternalLink size={20} />
+                      <span>Live Demo</span>
                     </a>
                   </div>
                 </div>
@@ -105,13 +112,13 @@ const Projects = () => {
             ))}
           </div>
 
-          <div className="mt-12 text-center">
+          <div className="mt-16 text-center">
             <a
               href="https://github.com/Arnabjoyantasaha"
-              className="inline-flex items-center space-x-2 sci-fi-border backdrop-blur-sm hover:border-green-400/50 text-white px-6 py-3 transition-all duration-300 transform hover:scale-105 font-mono hover-lift animate-fade-in"
+              className="inline-flex items-center space-x-3 tech-border-animated text-white px-8 py-4 professional-hover font-semibold animate-professional-fade-in"
             >
-              <Github size={20} className="transition-all duration-300" />
-              <span>./view_more_projects.sh</span>
+              <Github size={24} />
+              <span>View All Projects on GitHub</span>
             </a>
           </div>
         </div>

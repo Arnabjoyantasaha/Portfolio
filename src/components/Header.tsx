@@ -44,54 +44,54 @@ const Header = () => {
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-      scrolled ? 'bg-black/90 backdrop-blur-xl shadow-2xl border-b border-green-400/20' : 'bg-transparent'
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      scrolled ? 'bg-slate-900/95 backdrop-blur-xl professional-shadow border-b border-indigo-500/20' : 'bg-transparent'
     }`}>
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2 hover-lift">
+          <div className="flex items-center space-x-3 professional-hover">
             <div className="relative">
-              <Terminal className="h-8 w-8 text-green-400 transition-all duration-300 hover:rotate-12" />
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse-glow"></div>
+              <Terminal className="h-8 w-8 text-indigo-400 transition-all duration-300" />
+              <div className="absolute -top-1 -right-1 w-2 h-2 bg-indigo-400 rounded-full animate-tech-pulse"></div>
             </div>
-            <span className="text-xl font-bold font-mono">
-              <span className="text-green-400">{'<'}</span>
+            <span className="text-xl font-bold">
+              <span className="text-indigo-400 font-mono">{'<'}</span>
               <span className="text-white">Arnab</span>
-              <span className="text-green-400">{'/>'}</span>
+              <span className="text-indigo-400 font-mono">{'/>'}</span>
             </span>
           </div>
 
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex space-x-10">
             {['about', 'skills', 'projects', 'game', 'contact'].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
-                className="relative text-gray-300 hover:text-green-400 transition-all duration-300 capitalize font-medium font-mono hover:scale-105"
+                className="relative text-gray-300 hover:text-indigo-400 transition-all duration-300 capitalize font-medium professional-hover"
               >
                 {item}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green-400 to-emerald-500 transition-all duration-500 hover:w-full"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-400 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
               </button>
             ))}
           </nav>
 
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-gray-300 hover:text-green-400 transition-all duration-300 hover:scale-105"
+            className="md:hidden p-2 text-gray-300 hover:text-indigo-400 professional-hover"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
         {/* Mobile Menu */}
-        <div className={`md:hidden transition-all duration-500 ${
+        <div className={`md:hidden transition-all duration-300 ${
           isMenuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
         } overflow-hidden`}>
-          <nav className="pt-4 pb-2 space-y-2">
+          <nav className="pt-6 pb-4 space-y-3">
             {['about', 'skills', 'projects', 'game', 'contact'].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
-                className="block w-full text-left px-4 py-2 text-gray-300 hover:text-green-400 hover:bg-gray-800/50 rounded-lg transition-all duration-300 capitalize font-mono hover:scale-105 hover:translate-x-2"
+                className="block w-full text-left px-4 py-3 text-gray-300 hover:text-indigo-400 hover:bg-indigo-500/10 rounded-lg transition-all duration-300 capitalize professional-hover"
               >
                 {item}
               </button>

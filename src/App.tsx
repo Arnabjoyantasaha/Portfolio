@@ -29,7 +29,7 @@ function App() {
   }, [isLoading]);
 
   return (
-    <div className="min-h-screen bg-black text-white relative overflow-x-hidden font-mono">
+    <div className="min-h-screen bg-slate-900 text-white relative overflow-x-hidden">
       {isLoading && <LoadingScreen onLoadingComplete={handleLoadingComplete} />}
       <BackgroundPattern />
       <SmoothScroll />
