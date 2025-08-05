@@ -46,14 +46,14 @@ const Projects = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
-            My <span className="text-green-400">Projects</span>
+            My <span className="text-blue-500">Projects</span>
           </h2>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto animate-slide-in-up">
             {projects.map((project, index) => (
               <div
                 key={index}
-                className="sci-fi-border backdrop-blur-sm overflow-hidden hover:border-green-400/50 transition-all duration-300 transform hover:scale-105 group hover-lift"
+                className="sci-fi-border backdrop-blur-sm overflow-hidden hover:border-blue-400/50 transition-all duration-300 transform hover:scale-105 group hover-lift"
                 style={{ animationDelay: `${index * 0.3}s` }}
               >
                 <div className="relative overflow-hidden">
@@ -63,7 +63,7 @@ const Projects = () => {
                     className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-black/90 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
-                    <project.icon className="h-16 w-16 text-green-400" />
+                    <project.icon className="h-16 w-16 text-blue-400" />
                   </div>
                 </div>
 
@@ -77,7 +77,7 @@ const Projects = () => {
                     {project.tech.map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="bg-gray-800 text-green-400 px-3 py-1 rounded-full text-xs font-medium font-mono border border-green-400/30"
+                        className="bg-slate-800 text-blue-400 px-3 py-1 rounded-full text-xs font-medium font-mono border border-blue-400/30"
                       >
                         {tech}
                       </span>
@@ -87,14 +87,14 @@ const Projects = () => {
                   <div className="flex space-x-4">
                     <a
                       href={project.github}
-                      className="flex items-center space-x-2 text-gray-400 hover:text-green-400 transition-all duration-300 font-mono hover:scale-105"
+                      className="flex items-center space-x-2 text-gray-400 hover:text-blue-400 transition-all duration-300 font-mono hover:scale-105"
                     >
                       <Github size={18} />
                       <span className="text-sm">Code</span>
                     </a>
                     <a
                       href={project.demo}
-                      className="flex items-center space-x-2 text-gray-400 hover:text-green-400 transition-all duration-300 font-mono hover:scale-105"
+                      className="flex items-center space-x-2 text-gray-400 hover:text-blue-400 transition-all duration-300 font-mono hover:scale-105"
                     >
                       <ExternalLink size={18} />
                       <span className="text-sm">Demo</span>
@@ -108,7 +108,7 @@ const Projects = () => {
           <div className="mt-12 text-center">
             <a
               href="https://github.com/Arnabjoyantasaha"
-              className="inline-flex items-center space-x-2 sci-fi-border backdrop-blur-sm hover:border-green-400/50 text-white px-6 py-3 transition-all duration-300 transform hover:scale-105 font-mono hover-lift animate-fade-in"
+              className="inline-flex items-center space-x-2 sci-fi-border backdrop-blur-sm hover:border-blue-400/50 text-white px-6 py-3 transition-all duration-300 transform hover:scale-105 font-mono hover-lift animate-fade-in"
             >
               <Github size={20} className="transition-all duration-300" />
               <span>./view_more_projects.sh</span>

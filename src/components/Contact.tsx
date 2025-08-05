@@ -68,7 +68,7 @@ const Contact = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
-            Get In <span className="text-green-400">Touch</span>
+            Get In <span className="text-blue-500">Touch</span>
           </h2>
 
           <div className="grid md:grid-cols-2 gap-12">
@@ -76,11 +76,11 @@ const Contact = () => {
               <div className="sci-fi-border backdrop-blur-sm p-6 mb-8 hover-lift">
                 <div className="font-mono text-sm mb-4">
                   <div className="text-gray-400">// Let's connect!</div>
-                  <div className="text-green-400">{'function getInTouch() {'}</div>
+                  <div className="text-blue-400">{'function getInTouch() {'}</div>
                   <div className="ml-4 text-gray-300">
-                    <div>return <span className="text-green-400">"Ready to collaborate!"</span>;</div>
+                    <div>return <span className="text-blue-400">"Ready to collaborate!"</span>;</div>
                   </div>
-                  <div className="text-green-400">{'}'}</div>
+                  <div className="text-blue-400">{'}'}</div>
                 </div>
               </div>
 
@@ -94,9 +94,9 @@ const Contact = () => {
                   <a
                     key={index}
                     href={item.href}
-                    className="flex items-center space-x-4 text-gray-300 hover:text-green-400 transition-all duration-300 group hover:scale-105"
+                    className="flex items-center space-x-4 text-gray-300 hover:text-blue-400 transition-all duration-300 group hover:scale-105"
                   >
-                    <div className="sci-fi-border p-3 group-hover:border-green-400/50 transition-all duration-300 hover-lift">
+                    <div className="sci-fi-border p-3 group-hover:border-blue-400/50 transition-all duration-300 hover-lift">
                       <item.icon className="h-5 w-5 transition-all duration-300" />
                     </div>
                     <div>
@@ -112,10 +112,10 @@ const Contact = () => {
                   <a
                     key={index}
                     href={social.href}
-                    className="sci-fi-border p-3 hover:border-green-400/50 hover:bg-green-400/10 transition-all duration-300 transform hover:scale-110"
+                    className="sci-fi-border p-3 hover:border-blue-400/50 hover:bg-blue-400/10 transition-all duration-300 transform hover:scale-110"
                     aria-label={social.label}
                   >
-                    <social.icon className="h-5 w-5 text-gray-400 hover:text-green-400 transition-all duration-300" />
+                    <social.icon className="h-5 w-5 text-gray-400 hover:text-blue-400 transition-all duration-300" />
                   </a>
                 ))}
               </div>
@@ -143,7 +143,7 @@ const Contact = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full bg-black border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-green-400 focus:ring-2 focus:ring-green-400/50 transition-all duration-300 font-mono hover:border-green-400/50"
+                    className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/50 transition-all duration-300 font-mono hover:border-blue-400/50"
                     placeholder="Your name"
                     required
                   />
@@ -159,7 +159,7 @@ const Contact = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full bg-black border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-green-400 focus:ring-2 focus:ring-green-400/50 transition-all duration-300 font-mono hover:border-green-400/50"
+                    className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/50 transition-all duration-300 font-mono hover:border-blue-400/50"
                     placeholder="your.email@example.com"
                     required
                   />
@@ -175,7 +175,7 @@ const Contact = () => {
                     value={formData.message}
                     onChange={handleChange}
                     rows={5}
-                    className="w-full bg-black border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-green-400 focus:ring-2 focus:ring-green-400/50 transition-all duration-300 resize-none font-mono hover:border-green-400/50"
+                    className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/50 transition-all duration-300 resize-none font-mono hover:border-blue-400/50"
                     placeholder="Tell me about your project or just say hi!"
                     required
                   />
@@ -186,16 +186,16 @@ const Contact = () => {
                   disabled={isSubmitting}
                   className={`w-full font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 hover-lift ${
                     isSubmitting 
-                      ? 'bg-gray-600 cursor-not-allowed' 
-                      : 'bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600'
-                  } text-black font-mono`}
+                      ? 'bg-slate-600 cursor-not-allowed' 
+                      : 'bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600'
+                  } text-white font-mono`}
                 >
                   <Send size={18} className="transition-all duration-300" />
                   <span>{isSubmitting ? 'Sending...' : './send_message.sh'}</span>
                 </button>
 
                 {submitStatus === 'success' && (
-                  <div className="text-green-400 text-sm text-center">
+                  <div className="text-blue-400 text-sm text-center">
                     Message sent successfully! I'll get back to you soon.
                   </div>
                 )}

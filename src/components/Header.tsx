@@ -51,13 +51,13 @@ const Header = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2 hover-lift">
             <div className="relative">
-              <Terminal className="h-8 w-8 text-green-400 transition-all duration-300 hover:rotate-12" />
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse-glow"></div>
+              <Terminal className="h-8 w-8 text-blue-400 transition-all duration-300 hover:rotate-12" />
+              <div className="absolute -top-1 -right-1 w-3 h-3 bg-blue-400 rounded-full animate-pulse"></div>
             </div>
             <span className="text-xl font-bold font-mono">
-              <span className="text-green-400">{'<'}</span>
+              <span className="text-blue-400">{'<'}</span>
               <span className="text-white">Arnab</span>
-              <span className="text-green-400">{'/>'}</span>
+              <span className="text-blue-400">{'/>'}</span>
             </span>
           </div>
 
@@ -66,17 +66,17 @@ const Header = () => {
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
-                className="relative text-gray-300 hover:text-green-400 transition-all duration-300 capitalize font-medium font-mono hover:scale-105"
+                className="relative text-gray-300 hover:text-blue-400 transition-all duration-300 capitalize font-medium font-mono hover:scale-105"
               >
                 {item}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green-400 to-emerald-500 transition-all duration-500 hover:w-full"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-indigo-500 transition-all duration-500 hover:w-full"></span>
               </button>
             ))}
           </nav>
 
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-gray-300 hover:text-green-400 transition-all duration-300 hover:scale-105"
+            className="md:hidden p-2 text-gray-300 hover:text-blue-400 transition-all duration-300 hover:scale-105"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -91,7 +91,7 @@ const Header = () => {
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
-                className="block w-full text-left px-4 py-2 text-gray-300 hover:text-green-400 hover:bg-gray-800/50 rounded-lg transition-all duration-300 capitalize font-mono hover:scale-105 hover:translate-x-2"
+                className="block w-full text-left px-4 py-2 text-gray-300 hover:text-blue-400 hover:bg-slate-800/50 rounded-lg transition-all duration-300 capitalize font-mono hover:scale-105 hover:translate-x-2"
               >
                 {item}
               </button>

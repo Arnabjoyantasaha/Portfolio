@@ -51,13 +51,13 @@ const Hero = () => {
 
           <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-slide-in-up">
             <span className="text-white">Hi, I'm </span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-500">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-600">
               Arnab Joyanta Saha
             </span>
           </h1>
 
           <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed font-mono animate-slide-in-left">
-            <span className="text-green-400">{'// '}</span>
+            <span className="text-blue-400">{'// '}</span>
             Computer Science Engineering student passionate about building innovative solutions 
             and exploring the frontiers of technology.
           </p>
@@ -65,7 +65,7 @@ const Hero = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 animate-slide-in-right">
             <button
               onClick={() => scrollToSection('projects')}
-              className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-black font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-green-500/25 font-mono"
+              className="bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-blue-500/25 font-mono"
             >
               ./view_projects.sh
             </button>
@@ -77,20 +77,20 @@ const Hero = () => {
             </button>
             <button
               onClick={() => scrollToSection('contact')}
-              className="border border-green-400 text-green-400 hover:bg-green-400 hover:text-black font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 backdrop-blur-sm font-mono"
+              className="border border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 backdrop-blur-sm font-mono"
             >
               ./contact.sh
             </button>
           </div>
 
           <div className="flex justify-center space-x-6 animate-fade-in">
-            <a href="https://github.com/Arnabjoyantasaha" className="text-gray-400 hover:text-green-400 transition-all duration-300 transform hover:scale-110">
+            <a href="https://github.com/Arnabjoyantasaha" className="text-gray-400 hover:text-blue-400 transition-all duration-300 transform hover:scale-110">
               <Github size={24} />
             </a>
-            <a href="https://www.linkedin.com/in/arnab-joyanta-saha-3b2435301" className="text-gray-400 hover:text-green-400 transition-all duration-300 transform hover:scale-110">
+            <a href="https://www.linkedin.com/in/arnab-joyanta-saha-3b2435301" className="text-gray-400 hover:text-blue-400 transition-all duration-300 transform hover:scale-110">
               <Linkedin size={24} />
             </a>
-            <a href="mailto:arnabjoyantasaha@gmail.com" className="text-gray-400 hover:text-green-400 transition-all duration-300 transform hover:scale-110">
+            <a href="mailto:arnabjoyantasaha@gmail.com" className="text-gray-400 hover:text-blue-400 transition-all duration-300 transform hover:scale-110">
               <Mail size={24} />
             </a>
           </div>
@@ -98,7 +98,7 @@ const Hero = () => {
 
         <button
           onClick={() => scrollToSection('about')}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-gray-400 hover:text-green-400 transition-all duration-300 animate-bounce hover:scale-110"
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-gray-400 hover:text-blue-400 transition-all duration-300 animate-bounce hover:scale-110"
         >
           <ChevronDown size={32} />
         </button>
@@ -109,7 +109,7 @@ const Hero = () => {
         {[...Array(5)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-px h-20 bg-gradient-to-b from-transparent via-green-400 to-transparent data-stream"
+            className="absolute w-px h-20 bg-gradient-to-b from-transparent via-blue-400 to-transparent data-stream"
             style={{
               left: `${20 + i * 20}%`,
               animationDelay: `${i * 0.8}s`,

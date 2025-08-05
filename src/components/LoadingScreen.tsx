@@ -109,28 +109,28 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoadingComplete }) => {
         {/* Logo */}
         <div className="mb-8 loading-fade-in">
           <div className="inline-flex items-center justify-center w-20 h-20 border-2 border-green-400/30 rounded-lg bg-black/50 backdrop-blur-sm loading-pulse">
-            <Terminal className="w-10 h-10 text-green-400" />
+            <Terminal className="w-10 h-10 text-blue-400" />
           </div>
         </div>
 
         {/* Main Title */}
         <div className="mb-8 loading-fade-in" style={{ animationDelay: '0.2s' }}>
           <h1 className="text-2xl font-bold text-white mb-2 font-mono">
-            <span className="text-green-400">{'<'}</span>
+            <span className="text-blue-400">{'<'}</span>
             Arnab Joyanta Saha
-            <span className="text-green-400">{'/>'}</span>
+            <span className="text-blue-400">{'/>'}</span>
           </h1>
           <p className="text-gray-400 text-sm font-mono">CSE Student & Developer</p>
         </div>
 
         {/* Code Block */}
         <div className="mb-8 loading-fade-in" style={{ animationDelay: '0.4s' }}>
-          <div className="bg-gray-900/80 border border-green-400/20 rounded-lg p-4 text-left backdrop-blur-sm">
+          <div className="bg-slate-900/80 border border-blue-400/20 rounded-lg p-4 text-left backdrop-blur-sm">
             <div className="flex items-center mb-3">
               <div className="flex space-x-2">
                 <div className="w-3 h-3 bg-red-500 rounded-full"></div>
                 <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
               </div>
               <span className="ml-3 text-gray-400 text-xs font-mono">portfolio.jsx</span>
             </div>
@@ -165,7 +165,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoadingComplete }) => {
         {/* Loading Status */}
         <div className="mb-6 loading-fade-in" style={{ animationDelay: '0.6s' }}>
           <div className="flex items-center justify-center space-x-3 mb-3">
-            {React.createElement(loadingSteps[currentStep].icon, { className: "w-5 h-5 text-green-400 loading-pulse" })}
+            {React.createElement(loadingSteps[currentStep].icon, { className: "w-5 h-5 text-blue-400 loading-pulse" })}
             <span className="text-gray-300 font-mono text-sm">
               {loadingSteps[currentStep].text}
             </span>
@@ -174,15 +174,15 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoadingComplete }) => {
 
         {/* Progress Bar */}
         <div className="mb-4 loading-fade-in" style={{ animationDelay: '0.8s' }}>
-          <div className="w-full bg-gray-800 rounded-full h-2 overflow-hidden">
+          <div className="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
             <div 
-              className="h-full bg-gradient-to-r from-green-500 to-emerald-500 transition-all duration-300 ease-out"
+              className="h-full bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-300 ease-out"
               style={{ width: `${progress}%` }}
             />
           </div>
           <div className="flex justify-between mt-2">
             <span className="text-gray-400 text-xs font-mono">Loading...</span>
-            <span className="text-green-400 text-xs font-mono">{progress}%</span>
+            <span className="text-blue-400 text-xs font-mono">{progress}%</span>
           </div>
         </div>
 
@@ -192,7 +192,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoadingComplete }) => {
             <div
               key={index}
               className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index <= currentStep ? 'bg-green-400' : 'bg-gray-600'
+                index <= currentStep ? 'bg-blue-400' : 'bg-slate-600'
               }`}
             />
           ))}
