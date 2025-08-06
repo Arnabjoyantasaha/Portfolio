@@ -29,21 +29,25 @@ function App() {
   }, [isLoading]);
 
   return (
-    <div className="min-h-screen bg-black text-white relative overflow-x-hidden font-mono">
+    <div className={`min-h-screen bg-black text-white relative overflow-x-hidden font-mono ${isLoading ? 'overflow-hidden' : ''}`}>
       {isLoading && <LoadingScreen onLoadingComplete={handleLoadingComplete} />}
-      <BackgroundPattern />
-      <SmoothScroll />
-      <Header />
-      <main className="relative z-10">
-        <div className={`transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
-          <Hero />
-          <About />
-          <Skills />
-          <Projects />
-          <Game />
-          <Contact />
-        </div>
-      </main>
+      {!isLoading && (
+        <>
+          <BackgroundPattern />
+          <SmoothScroll />
+          <Header />
+          <main className="relative z-10">
+            <div className="transition-opacity duration-500 opacity-100">
+              <Hero />
+              <About />
+              <Skills />
+              <Projects />
+              <Game />
+              <Contact />
+            </div>
+          </main>
+        </>
+      )}
     </div>
   );
 }
