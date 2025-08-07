@@ -319,15 +319,9 @@ const Game = () => {
   };
 
   const handleGameSwitch = (game: 'tic-tac-toe' | 'chess') => {
-    console.log('Switching to game:', game); // Debug log
     setCurrentGame(game);
     if (game === 'chess') {
       initializeChessBoard();
-    } else {
-      // Reset tic-tac-toe when switching back
-      setBoard(Array(9).fill(null));
-      setWinner(null);
-      setIsPlayerTurn(true);
     }
   };
 
@@ -365,13 +359,6 @@ const Game = () => {
               >
                 Chess
               </button>
-            </div>
-          </div>
-
-          {/* Debug Info */}
-          <div className="text-center mb-4">
-            <div className="text-sm text-gray-400 font-mono">
-              Current Game: {currentGame} | Chess Board Length: {chessBoard.length}
             </div>
           </div>
 
@@ -427,12 +414,6 @@ const Game = () => {
 
             {/* Game Area */}
             <div className="animate-slide-in-right">
-              <div className="text-center mb-4">
-                <div className="text-lg font-mono text-blue-400">
-                  Playing: {currentGame === 'tic-tac-toe' ? 'Tic Tac Toe' : 'Chess'}
-                </div>
-              </div>
-              
               {currentGame === 'tic-tac-toe' ? (
                 <>
                   {/* Tic Tac Toe Controls */}
@@ -545,13 +526,7 @@ const Game = () => {
                 </>
               ) : (
                 <>
-                  {/* Chess Game - Debug Info */}
-                  <div className="text-center mb-4">
-                    <div className="text-sm text-gray-400 font-mono">
-                      Chess Board Initialized: {chessBoard.length > 0 ? 'Yes' : 'No'}
-                    </div>
-                  </div>
-                  
+                  {/* Chess Game */}
                   <div className="text-center mb-6">
                     <div className="sci-fi-border backdrop-blur-sm p-4">
                       <div className="flex items-center justify-center space-x-4 mb-2">
@@ -572,11 +547,6 @@ const Game = () => {
                   {/* Chess Board */}
                   {chessBoard.length > 0 && (
                     <div className="max-w-md mx-auto mb-6">
-                      <div className="text-center mb-2">
-                        <div className="text-sm text-gray-400 font-mono">
-                          Click on your pieces to select and move them
-                        </div>
-                      </div>
                       <div className="grid grid-cols-8 gap-0 border-2 border-slate-600 rounded-lg overflow-hidden">
                         {chessBoard.map((row, rowIndex) =>
                           row.map((piece, colIndex) => (
@@ -600,24 +570,15 @@ const Game = () => {
                         )}
                       </div>
                     </div>
-                  ) : (
-                    <div className="text-center mb-6">
-                      <div className="text-red-400 font-mono">
-                        Chess board not initialized. Click "New Game" to start.
-                      </div>
-                    </div>
                   )}
 
                   {/* Chess Controls */}
                   <div className="text-center">
                     <button
-                      onClick={() => {
-                        console.log('Initializing chess board...');
-                        initializeChessBoard();
-                      }}
+                      onClick={resetGame}
                       className="bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-300 font-mono"
                     >
-                      {chessBoard.length > 0 ? 'New Game' : 'Initialize Chess'}
+                      New Game
                     </button>
                   </div>
                 </>
