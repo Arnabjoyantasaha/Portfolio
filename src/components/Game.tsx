@@ -258,9 +258,9 @@ const Game = () => {
         newBoard[move.to[0]][move.to[1]] = piece;
         newBoard[move.from[0]][move.from[1]] = null;
         
-        const eval = minimax(newBoard, depth - 1, false, alpha, beta);
-        maxEval = Math.max(maxEval, eval);
-        alpha = Math.max(alpha, eval);
+        const evaluation = minimax(newBoard, depth - 1, false, alpha, beta);
+        maxEval = Math.max(maxEval, evaluation);
+        alpha = Math.max(alpha, evaluation);
         if (beta <= alpha) break;
       }
       return maxEval;
@@ -272,9 +272,9 @@ const Game = () => {
         newBoard[move.to[0]][move.to[1]] = piece;
         newBoard[move.from[0]][move.from[1]] = null;
         
-        const eval = minimax(newBoard, depth - 1, true, alpha, beta);
-        minEval = Math.min(minEval, eval);
-        beta = Math.min(beta, eval);
+        const evaluation = minimax(newBoard, depth - 1, true, alpha, beta);
+        minEval = Math.min(minEval, evaluation);
+        beta = Math.min(beta, evaluation);
         if (beta <= alpha) break;
       }
       return minEval;
