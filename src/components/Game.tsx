@@ -26,17 +26,12 @@ const Game = () => {
   const [selectedSquare, setSelectedSquare] = useState<[number, number] | null>(null);
   const [currentPlayer, setCurrentPlayer] = useState<'white' | 'black'>('white');
   const [chessWinner, setChessWinner] = useState<'white' | 'black' | 'draw' | null>(null);
+  const [isChessAIThinking, setIsChessAIThinking] = useState(false);
   
   const computerRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  // Initialize Chess Board when switching to chess
-  useEffect(() => {
-    if (currentGame === 'chess') {
-      initializeChessBoard();
-    }
-  }, [currentGame]);
-
+  // Initialize Chess Board
   const initializeChessBoard = () => {
     const initialBoard: ChessBoard = Array(8).fill(null).map(() => Array(8).fill(null));
     
@@ -59,7 +54,15 @@ const Game = () => {
     setCurrentPlayer('white');
     setChessWinner(null);
     setSelectedSquare(null);
+    setIsChessAIThinking(false);
   };
+
+  // Initialize chess board when component mounts or game switches to chess
+  useEffect(() => {
+    if (currentGame === 'chess' && chessBoard.length === 0) {
+      initializeChessBoard();
+    }
+  }, [currentGame, chessBoard.length]);
 
   const getPieceSymbol = (piece: ChessPiece): string => {
     if (!piece) return '';
@@ -76,7 +79,7 @@ const Game = () => {
     return symbols[piece.color][piece.type];
   };
 
-  const isValidMove = (fromRow: number, fromCol: number, toRow: number, toCol: number): boolean => {
+  const isValidChessMove = (fromRow: number, fromCol: number, toRow: number, toCol: number): boolean => {
     const piece = chessBoard[fromRow][fromCol];
     if (!piece || piece.color !== currentPlayer) return false;
     
@@ -134,8 +137,175 @@ const Game = () => {
     return true;
   };
 
+  const getAllValidMoves = (board: ChessBoard, color: 'white' | 'black'): Array<{from: [number, number], to: [number, number]}> => {
+    const moves: Array<{from: [number, number], to: [number, number]}> = [];
+    
+    for (let row = 0; row < 8; row++) {
+      for (let col = 0; col < 8; col++) {
+        const piece = board[row][col];
+        if (piece && piece.color === color) {
+          for (let toRow = 0; toRow < 8; toRow++) {
+            for (let toCol = 0; toCol < 8; toCol++) {
+              if (isValidMoveForBoard(board, row, col, toRow, toCol)) {
+                moves.push({from: [row, col], to: [toRow, toCol]});
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    return moves;
+  };
+
+  const isValidMoveForBoard = (board: ChessBoard, fromRow: number, fromCol: number, toRow: number, toCol: number): boolean => {
+    const piece = board[fromRow][fromCol];
+    if (!piece) return false;
+    
+    const targetPiece = board[toRow][toCol];
+    if (targetPiece && targetPiece.color === piece.color) return false;
+    
+    const rowDiff = Math.abs(toRow - fromRow);
+    const colDiff = Math.abs(toCol - fromCol);
+    
+    switch (piece.type) {
+      case 'pawn':
+        const direction = piece.color === 'white' ? -1 : 1;
+        const startRow = piece.color === 'white' ? 6 : 1;
+        
+        if (fromCol === toCol && !targetPiece) {
+          if (toRow === fromRow + direction) return true;
+          if (fromRow === startRow && toRow === fromRow + 2 * direction) return true;
+        }
+        if (colDiff === 1 && toRow === fromRow + direction && targetPiece) return true;
+        return false;
+        
+      case 'rook':
+        return (rowDiff === 0 || colDiff === 0) && isPathClearForBoard(board, fromRow, fromCol, toRow, toCol);
+        
+      case 'bishop':
+        return rowDiff === colDiff && isPathClearForBoard(board, fromRow, fromCol, toRow, toCol);
+        
+      case 'queen':
+        return (rowDiff === 0 || colDiff === 0 || rowDiff === colDiff) && isPathClearForBoard(board, fromRow, fromCol, toRow, toCol);
+        
+      case 'knight':
+        return (rowDiff === 2 && colDiff === 1) || (rowDiff === 1 && colDiff === 2);
+        
+      case 'king':
+        return rowDiff <= 1 && colDiff <= 1;
+        
+      default:
+        return false;
+    }
+  };
+
+  const isPathClearForBoard = (board: ChessBoard, fromRow: number, fromCol: number, toRow: number, toCol: number): boolean => {
+    const rowStep = toRow > fromRow ? 1 : toRow < fromRow ? -1 : 0;
+    const colStep = toCol > fromCol ? 1 : toCol < fromCol ? -1 : 0;
+    
+    let currentRow = fromRow + rowStep;
+    let currentCol = fromCol + colStep;
+    
+    while (currentRow !== toRow || currentCol !== toCol) {
+      if (board[currentRow][currentCol]) return false;
+      currentRow += rowStep;
+      currentCol += colStep;
+    }
+    
+    return true;
+  };
+
+  const evaluateBoard = (board: ChessBoard): number => {
+    const pieceValues = {
+      pawn: 1,
+      knight: 3,
+      bishop: 3,
+      rook: 5,
+      queen: 9,
+      king: 100
+    };
+    
+    let score = 0;
+    for (let row = 0; row < 8; row++) {
+      for (let col = 0; col < 8; col++) {
+        const piece = board[row][col];
+        if (piece) {
+          const value = pieceValues[piece.type];
+          score += piece.color === 'black' ? value : -value;
+        }
+      }
+    }
+    return score;
+  };
+
+  const minimax = (board: ChessBoard, depth: number, isMaximizing: boolean, alpha: number = -Infinity, beta: number = Infinity): number => {
+    if (depth === 0) {
+      return evaluateBoard(board);
+    }
+    
+    const moves = getAllValidMoves(board, isMaximizing ? 'black' : 'white');
+    
+    if (moves.length === 0) {
+      return isMaximizing ? -1000 : 1000;
+    }
+    
+    if (isMaximizing) {
+      let maxEval = -Infinity;
+      for (const move of moves) {
+        const newBoard = board.map(row => [...row]);
+        const piece = newBoard[move.from[0]][move.from[1]];
+        newBoard[move.to[0]][move.to[1]] = piece;
+        newBoard[move.from[0]][move.from[1]] = null;
+        
+        const eval = minimax(newBoard, depth - 1, false, alpha, beta);
+        maxEval = Math.max(maxEval, eval);
+        alpha = Math.max(alpha, eval);
+        if (beta <= alpha) break;
+      }
+      return maxEval;
+    } else {
+      let minEval = Infinity;
+      for (const move of moves) {
+        const newBoard = board.map(row => [...row]);
+        const piece = newBoard[move.from[0]][move.from[1]];
+        newBoard[move.to[0]][move.to[1]] = piece;
+        newBoard[move.from[0]][move.from[1]] = null;
+        
+        const eval = minimax(newBoard, depth - 1, true, alpha, beta);
+        minEval = Math.min(minEval, eval);
+        beta = Math.min(beta, eval);
+        if (beta <= alpha) break;
+      }
+      return minEval;
+    }
+  };
+
+  const getBestChessMove = (board: ChessBoard): {from: [number, number], to: [number, number]} | null => {
+    const moves = getAllValidMoves(board, 'black');
+    if (moves.length === 0) return null;
+    
+    let bestMove = moves[0];
+    let bestScore = -Infinity;
+    
+    for (const move of moves) {
+      const newBoard = board.map(row => [...row]);
+      const piece = newBoard[move.from[0]][move.from[1]];
+      newBoard[move.to[0]][move.to[1]] = piece;
+      newBoard[move.from[0]][move.from[1]] = null;
+      
+      const score = minimax(newBoard, 3, false);
+      if (score > bestScore) {
+        bestScore = score;
+        bestMove = move;
+      }
+    }
+    
+    return bestMove;
+  };
+
   const handleChessSquareClick = (row: number, col: number) => {
-    if (chessWinner) return;
+    if (chessWinner || isChessAIThinking || currentPlayer !== 'white') return;
     
     if (selectedSquare) {
       const [fromRow, fromCol] = selectedSquare;
@@ -145,20 +315,42 @@ const Game = () => {
         return;
       }
       
-      if (isValidMove(fromRow, fromCol, row, col)) {
+      if (isValidChessMove(fromRow, fromCol, row, col)) {
         const newBoard = chessBoard.map(row => [...row]);
         const piece = newBoard[fromRow][fromCol];
         newBoard[row][col] = piece;
         newBoard[fromRow][fromCol] = null;
         
         setChessBoard(newBoard);
-        setCurrentPlayer(currentPlayer === 'white' ? 'black' : 'white');
+        setCurrentPlayer('black');
         setSelectedSquare(null);
         
-        // Simple win condition check (capture king)
+        // Check for win condition
         if (newBoard[row][col]?.type === 'king') {
-          setChessWinner(currentPlayer);
+          setChessWinner('white');
+          return;
         }
+        
+        // AI move
+        setIsChessAIThinking(true);
+        setTimeout(() => {
+          const aiMove = getBestChessMove(newBoard);
+          if (aiMove) {
+            const aiBoard = newBoard.map(row => [...row]);
+            const aiPiece = aiBoard[aiMove.from[0]][aiMove.from[1]];
+            aiBoard[aiMove.to[0]][aiMove.to[1]] = aiPiece;
+            aiBoard[aiMove.from[0]][aiMove.from[1]] = null;
+            
+            setChessBoard(aiBoard);
+            
+            // Check for AI win
+            if (aiBoard[aiMove.to[0]][aiMove.to[1]]?.type === 'king') {
+              setChessWinner('black');
+            }
+          }
+          setCurrentPlayer('white');
+          setIsChessAIThinking(false);
+        }, 1000);
       } else {
         const piece = chessBoard[row][col];
         if (piece && piece.color === currentPlayer) {
@@ -209,7 +401,7 @@ const Game = () => {
     return board.every(cell => cell !== null) ? 'tie' : null;
   };
 
-  const minimax = (board: Board, depth: number, isMaximizing: boolean): number => {
+  const minimax2 = (board: Board, depth: number, isMaximizing: boolean): number => {
     const result = checkWinner(board);
     
     if (result === 'O') return 10 - depth;
@@ -221,7 +413,7 @@ const Game = () => {
       for (let i = 0; i < 9; i++) {
         if (board[i] === null) {
           board[i] = 'O';
-          const score = minimax(board, depth + 1, false);
+          const score = minimax2(board, depth + 1, false);
           board[i] = null;
           bestScore = Math.max(score, bestScore);
         }
@@ -232,7 +424,7 @@ const Game = () => {
       for (let i = 0; i < 9; i++) {
         if (board[i] === null) {
           board[i] = 'X';
-          const score = minimax(board, depth + 1, true);
+          const score = minimax2(board, depth + 1, true);
           board[i] = null;
           bestScore = Math.min(score, bestScore);
         }
@@ -253,7 +445,7 @@ const Game = () => {
     for (let i = 0; i < 9; i++) {
       if (board[i] === null) {
         board[i] = 'O';
-        const score = minimax(board, 0, false);
+        const score = minimax2(board, 0, false);
         board[i] = null;
         if (score > bestScore) {
           bestScore = score;
@@ -318,7 +510,9 @@ const Game = () => {
     resetGame();
   };
 
-  const handleGameSwitch = (game: 'tic-tac-toe' | 'chess') => {
+  // Fixed game switching function
+  const switchToGame = (game: 'tic-tac-toe' | 'chess') => {
+    console.log('Switching to:', game); // Debug log
     setCurrentGame(game);
     if (game === 'chess') {
       initializeChessBoard();
@@ -340,7 +534,7 @@ const Game = () => {
           <div className="flex justify-center mb-8">
             <div className="sci-fi-border backdrop-blur-sm p-2 flex space-x-2">
               <button
-                onClick={() => handleGameSwitch('tic-tac-toe')}
+                onClick={() => switchToGame('tic-tac-toe')}
                 className={`px-6 py-2 rounded-lg font-mono text-sm transition-all duration-300 ${
                   currentGame === 'tic-tac-toe' 
                     ? 'bg-blue-500 text-white' 
@@ -350,7 +544,7 @@ const Game = () => {
                 Tic Tac Toe
               </button>
               <button
-                onClick={() => handleGameSwitch('chess')}
+                onClick={() => switchToGame('chess')}
                 className={`px-6 py-2 rounded-lg font-mono text-sm transition-all duration-300 ${
                   currentGame === 'chess' 
                     ? 'bg-blue-500 text-white' 
@@ -386,10 +580,15 @@ const Game = () => {
                           <div className="text-purple-400 mb-1">Difficulty: {gameMode.toUpperCase()}</div>
                         )}
                         {currentGame === 'chess' && (
-                          <div className="text-purple-400 mb-1">Player: {currentPlayer.toUpperCase()}</div>
+                          <>
+                            <div className="text-purple-400 mb-1">Player: {currentPlayer.toUpperCase()}</div>
+                            {isChessAIThinking && <div className="text-red-400 mb-1">AI THINKING...</div>}
+                          </>
                         )}
                         <div className="text-emerald-400">Ready to play!</div>
-                        <div className="mt-4 text-blue-400 animate-pulse">{'>'} Waiting for your move...</div>
+                        <div className="mt-4 text-blue-400 animate-pulse">
+                          {'>'} {isChessAIThinking ? 'AI is thinking...' : 'Waiting for your move...'}
+                        </div>
                       </div>
                       
                       {/* Animated cursor */}
@@ -538,7 +737,12 @@ const Game = () => {
                       </div>
                       {chessWinner && (
                         <div className="text-xl font-bold text-yellow-400">
-                          {chessWinner} Wins! 👑
+                          {chessWinner === 'white' ? 'You Win!' : 'AI Wins!'} 👑
+                        </div>
+                      )}
+                      {isChessAIThinking && (
+                        <div className="text-lg text-red-400 font-mono animate-pulse">
+                          AI is thinking... 🤔
                         </div>
                       )}
                     </div>
@@ -562,7 +766,7 @@ const Game = () => {
                                   ? 'ring-2 ring-blue-400'
                                   : ''
                               }`}
-                              disabled={!!chessWinner}
+                              disabled={!!chessWinner || isChessAIThinking}
                             >
                               {getPieceSymbol(piece)}
                             </button>
