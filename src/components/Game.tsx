@@ -27,18 +27,19 @@ const Game = () => {
   const [currentPlayer, setCurrentPlayer] = useState<'white' | 'black'>('white');
   const [chessWinner, setChessWinner] = useState<'white' | 'black' | 'draw' | null>(null);
   const [isChessAIThinking, setIsChessAIThinking] = useState(false);
+  const [moveHistory, setMoveHistory] = useState<Array<{from: [number, number], to: [number, number], piece: ChessPiece, captured?: ChessPiece}>>([]);
   
   const computerRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   // Initialize Chess Board
-  const initializeChessBoard = () => {
-    const initialBoard: ChessBoard = Array(8).fill(null).map(() => Array(8).fill(null));
+  const initializeChessBoard = (): ChessBoard => {
+    const board: ChessBoard = Array(8).fill(null).map(() => Array(8).fill(null));
     
     // Place pawns
     for (let i = 0; i < 8; i++) {
-      initialBoard[1][i] = { type: 'pawn', color: 'black' };
-      initialBoard[6][i] = { type: 'pawn', color: 'white' };
+      board[1][i] = { type: 'pawn', color: 'black' };
+      board[6][i] = { type: 'pawn', color: 'white' };
     }
     
     // Place other pieces
@@ -46,21 +47,23 @@ const Game = () => {
       ['rook', 'knight', 'bishop', 'queen', 'king', 'bishop', 'knight', 'rook'];
     
     for (let i = 0; i < 8; i++) {
-      initialBoard[0][i] = { type: pieceOrder[i], color: 'black' };
-      initialBoard[7][i] = { type: pieceOrder[i], color: 'white' };
+      board[0][i] = { type: pieceOrder[i], color: 'black' };
+      board[7][i] = { type: pieceOrder[i], color: 'white' };
     }
     
-    setChessBoard(initialBoard);
-    setCurrentPlayer('white');
-    setChessWinner(null);
-    setSelectedSquare(null);
-    setIsChessAIThinking(false);
+    return board;
   };
 
-  // Initialize chess board when component mounts or game switches to chess
+  // Initialize chess when switching to chess
   useEffect(() => {
     if (currentGame === 'chess' && chessBoard.length === 0) {
-      initializeChessBoard();
+      const newBoard = initializeChessBoard();
+      setChessBoard(newBoard);
+      setCurrentPlayer('white');
+      setChessWinner(null);
+      setSelectedSquare(null);
+      setIsChessAIThinking(false);
+      setMoveHistory([]);
     }
   }, [currentGame, chessBoard.length]);
 
@@ -79,86 +82,8 @@ const Game = () => {
     return symbols[piece.color][piece.type];
   };
 
-  const isValidChessMove = (fromRow: number, fromCol: number, toRow: number, toCol: number): boolean => {
-    const piece = chessBoard[fromRow][fromCol];
-    if (!piece || piece.color !== currentPlayer) return false;
-    
-    const targetPiece = chessBoard[toRow][toCol];
-    if (targetPiece && targetPiece.color === piece.color) return false;
-    
-    const rowDiff = Math.abs(toRow - fromRow);
-    const colDiff = Math.abs(toCol - fromCol);
-    
-    switch (piece.type) {
-      case 'pawn':
-        const direction = piece.color === 'white' ? -1 : 1;
-        const startRow = piece.color === 'white' ? 6 : 1;
-        
-        if (fromCol === toCol && !targetPiece) {
-          if (toRow === fromRow + direction) return true;
-          if (fromRow === startRow && toRow === fromRow + 2 * direction) return true;
-        }
-        if (colDiff === 1 && toRow === fromRow + direction && targetPiece) return true;
-        return false;
-        
-      case 'rook':
-        return (rowDiff === 0 || colDiff === 0) && isPathClear(fromRow, fromCol, toRow, toCol);
-        
-      case 'bishop':
-        return rowDiff === colDiff && isPathClear(fromRow, fromCol, toRow, toCol);
-        
-      case 'queen':
-        return (rowDiff === 0 || colDiff === 0 || rowDiff === colDiff) && isPathClear(fromRow, fromCol, toRow, toCol);
-        
-      case 'knight':
-        return (rowDiff === 2 && colDiff === 1) || (rowDiff === 1 && colDiff === 2);
-        
-      case 'king':
-        return rowDiff <= 1 && colDiff <= 1;
-        
-      default:
-        return false;
-    }
-  };
-
-  const isPathClear = (fromRow: number, fromCol: number, toRow: number, toCol: number): boolean => {
-    const rowStep = toRow > fromRow ? 1 : toRow < fromRow ? -1 : 0;
-    const colStep = toCol > fromCol ? 1 : toCol < fromCol ? -1 : 0;
-    
-    let currentRow = fromRow + rowStep;
-    let currentCol = fromCol + colStep;
-    
-    while (currentRow !== toRow || currentCol !== toCol) {
-      if (chessBoard[currentRow][currentCol]) return false;
-      currentRow += rowStep;
-      currentCol += colStep;
-    }
-    
-    return true;
-  };
-
-  const getAllValidMoves = (board: ChessBoard, color: 'white' | 'black'): Array<{from: [number, number], to: [number, number]}> => {
-    const moves: Array<{from: [number, number], to: [number, number]}> = [];
-    
-    for (let row = 0; row < 8; row++) {
-      for (let col = 0; col < 8; col++) {
-        const piece = board[row][col];
-        if (piece && piece.color === color) {
-          for (let toRow = 0; toRow < 8; toRow++) {
-            for (let toCol = 0; toCol < 8; toCol++) {
-              if (isValidMoveForBoard(board, row, col, toRow, toCol)) {
-                moves.push({from: [row, col], to: [toRow, toCol]});
-              }
-            }
-          }
-        }
-      }
-    }
-    
-    return moves;
-  };
-
-  const isValidMoveForBoard = (board: ChessBoard, fromRow: number, fromCol: number, toRow: number, toCol: number): boolean => {
+  // Advanced Chess Move Validation
+  const isValidChessMove = (board: ChessBoard, fromRow: number, fromCol: number, toRow: number, toCol: number): boolean => {
     const piece = board[fromRow][fromCol];
     if (!piece) return false;
     
@@ -167,27 +92,31 @@ const Game = () => {
     
     const rowDiff = Math.abs(toRow - fromRow);
     const colDiff = Math.abs(toCol - fromCol);
+    const rowDir = toRow > fromRow ? 1 : toRow < fromRow ? -1 : 0;
+    const colDir = toCol > fromCol ? 1 : toCol < fromCol ? -1 : 0;
     
     switch (piece.type) {
       case 'pawn':
         const direction = piece.color === 'white' ? -1 : 1;
         const startRow = piece.color === 'white' ? 6 : 1;
         
+        // Forward move
         if (fromCol === toCol && !targetPiece) {
           if (toRow === fromRow + direction) return true;
           if (fromRow === startRow && toRow === fromRow + 2 * direction) return true;
         }
+        // Diagonal capture
         if (colDiff === 1 && toRow === fromRow + direction && targetPiece) return true;
         return false;
         
       case 'rook':
-        return (rowDiff === 0 || colDiff === 0) && isPathClearForBoard(board, fromRow, fromCol, toRow, toCol);
+        return (rowDiff === 0 || colDiff === 0) && isPathClear(board, fromRow, fromCol, toRow, toCol);
         
       case 'bishop':
-        return rowDiff === colDiff && isPathClearForBoard(board, fromRow, fromCol, toRow, toCol);
+        return rowDiff === colDiff && isPathClear(board, fromRow, fromCol, toRow, toCol);
         
       case 'queen':
-        return (rowDiff === 0 || colDiff === 0 || rowDiff === colDiff) && isPathClearForBoard(board, fromRow, fromCol, toRow, toCol);
+        return (rowDiff === 0 || colDiff === 0 || rowDiff === colDiff) && isPathClear(board, fromRow, fromCol, toRow, toCol);
         
       case 'knight':
         return (rowDiff === 2 && colDiff === 1) || (rowDiff === 1 && colDiff === 2);
@@ -200,7 +129,7 @@ const Game = () => {
     }
   };
 
-  const isPathClearForBoard = (board: ChessBoard, fromRow: number, fromCol: number, toRow: number, toCol: number): boolean => {
+  const isPathClear = (board: ChessBoard, fromRow: number, fromCol: number, toRow: number, toCol: number): boolean => {
     const rowStep = toRow > fromRow ? 1 : toRow < fromRow ? -1 : 0;
     const colStep = toCol > fromCol ? 1 : toCol < fromCol ? -1 : 0;
     
@@ -216,68 +145,128 @@ const Game = () => {
     return true;
   };
 
-  const evaluateBoard = (board: ChessBoard): number => {
+  // Advanced Chess AI with improved evaluation
+  const evaluatePosition = (board: ChessBoard): number => {
     const pieceValues = {
-      pawn: 1,
-      knight: 3,
-      bishop: 3,
-      rook: 5,
-      queen: 9,
-      king: 100
+      pawn: 100,
+      knight: 320,
+      bishop: 330,
+      rook: 500,
+      queen: 900,
+      king: 20000
     };
-    
+
+    // Position bonuses for better play
+    const pawnTable = [
+      [0,  0,  0,  0,  0,  0,  0,  0],
+      [50, 50, 50, 50, 50, 50, 50, 50],
+      [10, 10, 20, 30, 30, 20, 10, 10],
+      [5,  5, 10, 25, 25, 10,  5,  5],
+      [0,  0,  0, 20, 20,  0,  0,  0],
+      [5, -5,-10,  0,  0,-10, -5,  5],
+      [5, 10, 10,-20,-20, 10, 10,  5],
+      [0,  0,  0,  0,  0,  0,  0,  0]
+    ];
+
+    const knightTable = [
+      [-50,-40,-30,-30,-30,-30,-40,-50],
+      [-40,-20,  0,  0,  0,  0,-20,-40],
+      [-30,  0, 10, 15, 15, 10,  0,-30],
+      [-30,  5, 15, 20, 20, 15,  5,-30],
+      [-30,  0, 15, 20, 20, 15,  0,-30],
+      [-30,  5, 10, 15, 15, 10,  5,-30],
+      [-40,-20,  0,  5,  5,  0,-20,-40],
+      [-50,-40,-30,-30,-30,-30,-40,-50]
+    ];
+
     let score = 0;
+    
     for (let row = 0; row < 8; row++) {
       for (let col = 0; col < 8; col++) {
         const piece = board[row][col];
         if (piece) {
-          const value = pieceValues[piece.type];
-          score += piece.color === 'black' ? value : -value;
+          let pieceScore = pieceValues[piece.type];
+          
+          // Add positional bonuses
+          if (piece.type === 'pawn') {
+            pieceScore += piece.color === 'white' ? pawnTable[7-row][col] : pawnTable[row][col];
+          } else if (piece.type === 'knight') {
+            pieceScore += piece.color === 'white' ? knightTable[7-row][col] : knightTable[row][col];
+          }
+          
+          // Center control bonus
+          if ((row >= 3 && row <= 4) && (col >= 3 && col <= 4)) {
+            pieceScore += 10;
+          }
+          
+          score += piece.color === 'black' ? pieceScore : -pieceScore;
         }
       }
     }
+    
     return score;
+  };
+
+  const getAllValidMoves = (board: ChessBoard, color: 'white' | 'black'): Array<{from: [number, number], to: [number, number]}> => {
+    const moves: Array<{from: [number, number], to: [number, number]}> = [];
+    
+    for (let row = 0; row < 8; row++) {
+      for (let col = 0; col < 8; col++) {
+        const piece = board[row][col];
+        if (piece && piece.color === color) {
+          for (let toRow = 0; toRow < 8; toRow++) {
+            for (let toCol = 0; toCol < 8; toCol++) {
+              if (isValidChessMove(board, row, col, toRow, toCol)) {
+                moves.push({from: [row, col], to: [toRow, toCol]});
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    return moves;
+  };
+
+  const makeMove = (board: ChessBoard, move: {from: [number, number], to: [number, number]}): ChessBoard => {
+    const newBoard = board.map(row => [...row]);
+    const piece = newBoard[move.from[0]][move.from[1]];
+    newBoard[move.to[0]][move.to[1]] = piece;
+    newBoard[move.from[0]][move.from[1]] = null;
+    return newBoard;
   };
 
   const minimax = (board: ChessBoard, depth: number, isMaximizing: boolean, alpha: number = -Infinity, beta: number = Infinity): number => {
     if (depth === 0) {
-      return evaluateBoard(board);
+      return evaluatePosition(board);
     }
     
     const moves = getAllValidMoves(board, isMaximizing ? 'black' : 'white');
     
     if (moves.length === 0) {
-      return isMaximizing ? -1000 : 1000;
+      return isMaximizing ? -10000 : 10000;
     }
     
     if (isMaximizing) {
-      let maxEval = -Infinity;
+      let maxEvaluation = -Infinity;
       for (const move of moves) {
-        const newBoard = board.map(row => [...row]);
-        const piece = newBoard[move.from[0]][move.from[1]];
-        newBoard[move.to[0]][move.to[1]] = piece;
-        newBoard[move.from[0]][move.from[1]] = null;
-        
+        const newBoard = makeMove(board, move);
         const evaluation = minimax(newBoard, depth - 1, false, alpha, beta);
-        maxEval = Math.max(maxEval, evaluation);
+        maxEvaluation = Math.max(maxEvaluation, evaluation);
         alpha = Math.max(alpha, evaluation);
-        if (beta <= alpha) break;
+        if (beta <= alpha) break; // Alpha-beta pruning
       }
-      return maxEval;
+      return maxEvaluation;
     } else {
-      let minEval = Infinity;
+      let minEvaluation = Infinity;
       for (const move of moves) {
-        const newBoard = board.map(row => [...row]);
-        const piece = newBoard[move.from[0]][move.from[1]];
-        newBoard[move.to[0]][move.to[1]] = piece;
-        newBoard[move.from[0]][move.from[1]] = null;
-        
+        const newBoard = makeMove(board, move);
         const evaluation = minimax(newBoard, depth - 1, true, alpha, beta);
-        minEval = Math.min(minEval, evaluation);
+        minEvaluation = Math.min(minEvaluation, evaluation);
         beta = Math.min(beta, evaluation);
-        if (beta <= alpha) break;
+        if (beta <= alpha) break; // Alpha-beta pruning
       }
-      return minEval;
+      return minEvaluation;
     }
   };
 
@@ -288,13 +277,13 @@ const Game = () => {
     let bestMove = moves[0];
     let bestScore = -Infinity;
     
+    // Use deeper search for better AI
+    const searchDepth = 4;
+    
     for (const move of moves) {
-      const newBoard = board.map(row => [...row]);
-      const piece = newBoard[move.from[0]][move.from[1]];
-      newBoard[move.to[0]][move.to[1]] = piece;
-      newBoard[move.from[0]][move.from[1]] = null;
+      const newBoard = makeMove(board, move);
+      const score = minimax(newBoard, searchDepth - 1, false);
       
-      const score = minimax(newBoard, 3, false);
       if (score > bestScore) {
         bestScore = score;
         bestMove = move;
@@ -315,18 +304,28 @@ const Game = () => {
         return;
       }
       
-      if (isValidChessMove(fromRow, fromCol, row, col)) {
+      if (isValidChessMove(chessBoard, fromRow, fromCol, row, col)) {
         const newBoard = chessBoard.map(row => [...row]);
         const piece = newBoard[fromRow][fromCol];
+        const capturedPiece = newBoard[row][col];
+        
         newBoard[row][col] = piece;
         newBoard[fromRow][fromCol] = null;
+        
+        // Add to move history
+        setMoveHistory(prev => [...prev, {
+          from: [fromRow, fromCol],
+          to: [row, col],
+          piece: piece,
+          captured: capturedPiece
+        }]);
         
         setChessBoard(newBoard);
         setCurrentPlayer('black');
         setSelectedSquare(null);
         
         // Check for win condition
-        if (newBoard[row][col]?.type === 'king') {
+        if (capturedPiece?.type === 'king') {
           setChessWinner('white');
           return;
         }
@@ -338,19 +337,29 @@ const Game = () => {
           if (aiMove) {
             const aiBoard = newBoard.map(row => [...row]);
             const aiPiece = aiBoard[aiMove.from[0]][aiMove.from[1]];
+            const aiCaptured = aiBoard[aiMove.to[0]][aiMove.to[1]];
+            
             aiBoard[aiMove.to[0]][aiMove.to[1]] = aiPiece;
             aiBoard[aiMove.from[0]][aiMove.from[1]] = null;
             
             setChessBoard(aiBoard);
             
+            // Add AI move to history
+            setMoveHistory(prev => [...prev, {
+              from: aiMove.from,
+              to: aiMove.to,
+              piece: aiPiece,
+              captured: aiCaptured
+            }]);
+            
             // Check for AI win
-            if (aiBoard[aiMove.to[0]][aiMove.to[1]]?.type === 'king') {
+            if (aiCaptured?.type === 'king') {
               setChessWinner('black');
             }
           }
           setCurrentPlayer('white');
           setIsChessAIThinking(false);
-        }, 1000);
+        }, 1200);
       } else {
         const piece = chessBoard[row][col];
         if (piece && piece.color === currentPlayer) {
@@ -401,7 +410,7 @@ const Game = () => {
     return board.every(cell => cell !== null) ? 'tie' : null;
   };
 
-  const minimax2 = (board: Board, depth: number, isMaximizing: boolean): number => {
+  const minimaxTicTac = (board: Board, depth: number, isMaximizing: boolean): number => {
     const result = checkWinner(board);
     
     if (result === 'O') return 10 - depth;
@@ -413,7 +422,7 @@ const Game = () => {
       for (let i = 0; i < 9; i++) {
         if (board[i] === null) {
           board[i] = 'O';
-          const score = minimax2(board, depth + 1, false);
+          const score = minimaxTicTac(board, depth + 1, false);
           board[i] = null;
           bestScore = Math.max(score, bestScore);
         }
@@ -424,7 +433,7 @@ const Game = () => {
       for (let i = 0; i < 9; i++) {
         if (board[i] === null) {
           board[i] = 'X';
-          const score = minimax2(board, depth + 1, true);
+          const score = minimaxTicTac(board, depth + 1, true);
           board[i] = null;
           bestScore = Math.min(score, bestScore);
         }
@@ -445,7 +454,7 @@ const Game = () => {
     for (let i = 0; i < 9; i++) {
       if (board[i] === null) {
         board[i] = 'O';
-        const score = minimax2(board, 0, false);
+        const score = minimaxTicTac(board, 0, false);
         board[i] = null;
         if (score > bestScore) {
           bestScore = score;
@@ -501,7 +510,13 @@ const Game = () => {
       setWinner(null);
       setIsPlayerTurn(true);
     } else {
-      initializeChessBoard();
+      const newBoard = initializeChessBoard();
+      setChessBoard(newBoard);
+      setCurrentPlayer('white');
+      setChessWinner(null);
+      setSelectedSquare(null);
+      setIsChessAIThinking(false);
+      setMoveHistory([]);
     }
   };
 
@@ -510,12 +525,18 @@ const Game = () => {
     resetGame();
   };
 
-  // Fixed game switching function
-  const switchToGame = (game: 'tic-tac-toe' | 'chess') => {
-    console.log('Switching to:', game); // Debug log
+  const switchGame = (game: 'tic-tac-toe' | 'chess') => {
+    console.log('Switching to game:', game);
     setCurrentGame(game);
+    
     if (game === 'chess') {
-      initializeChessBoard();
+      const newBoard = initializeChessBoard();
+      setChessBoard(newBoard);
+      setCurrentPlayer('white');
+      setChessWinner(null);
+      setSelectedSquare(null);
+      setIsChessAIThinking(false);
+      setMoveHistory([]);
     }
   };
 
@@ -534,7 +555,7 @@ const Game = () => {
           <div className="flex justify-center mb-8">
             <div className="sci-fi-border backdrop-blur-sm p-2 flex space-x-2">
               <button
-                onClick={() => switchToGame('tic-tac-toe')}
+                onClick={() => switchGame('tic-tac-toe')}
                 className={`px-6 py-2 rounded-lg font-mono text-sm transition-all duration-300 ${
                   currentGame === 'tic-tac-toe' 
                     ? 'bg-blue-500 text-white' 
@@ -544,7 +565,7 @@ const Game = () => {
                 Tic Tac Toe
               </button>
               <button
-                onClick={() => switchToGame('chess')}
+                onClick={() => switchGame('chess')}
                 className={`px-6 py-2 rounded-lg font-mono text-sm transition-all duration-300 ${
                   currentGame === 'chess' 
                     ? 'bg-blue-500 text-white' 
@@ -736,7 +757,7 @@ const Game = () => {
                         <Shield className="h-6 w-6 text-blue-400" />
                       </div>
                       {chessWinner && (
-                        <div className="text-xl font-bold text-yellow-400">
+                        <div className="text-xl font-bold text-yellow-400 mb-2">
                           {chessWinner === 'white' ? 'You Win!' : 'AI Wins!'} 👑
                         </div>
                       )}
