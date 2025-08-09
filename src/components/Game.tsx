@@ -12,7 +12,7 @@ type ChessPiece = {
 type ChessBoard = ChessPiece[][];
 
 const Game = () => {
-  const [currentGame, setCurrentGame] = useState<'tic-tac-toe' | 'chess'>('tic-tac-toe');
+  const [currentGame, setCurrentGame] = useState<'tic-tac-toe' | 'chess'>('chess');
   
   // Tic Tac Toe State
   const [board, setBoard] = useState<Board>(Array(9).fill(null));
@@ -547,23 +547,10 @@ const Game = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
             <span className="text-blue-500">Play Games</span> With Me
           </h2>
-          <p className="text-center text-gray-400 mb-12 font-mono">
-            Challenge my AI in classic strategy games
-          </p>
 
           {/* Game Selection */}
-          <div className="flex justify-center mb-8">
-            <div className="sci-fi-border backdrop-blur-sm p-2 flex space-x-2">
-              <button
-                onClick={() => switchGame('tic-tac-toe')}
-                className={`px-6 py-2 rounded-lg font-mono text-sm transition-all duration-300 ${
-                  currentGame === 'tic-tac-toe' 
-                    ? 'bg-blue-500 text-white' 
-                    : 'text-blue-400 hover:bg-blue-500/20'
-                }`}
-              >
-                Tic Tac Toe
-              </button>
+          <div className="flex justify-center mb-8 space-x-4">
+            <div className="sci-fi-border backdrop-blur-sm">
               <button
                 onClick={() => switchGame('chess')}
                 className={`px-6 py-2 rounded-lg font-mono text-sm transition-all duration-300 ${
@@ -572,7 +559,19 @@ const Game = () => {
                     : 'text-blue-400 hover:bg-blue-500/20'
                 }`}
               >
-                Chess
+                ♔ Chess Game
+              </button>
+            </div>
+            <div className="sci-fi-border backdrop-blur-sm">
+              <button
+                onClick={() => switchGame('tic-tac-toe')}
+                className={`px-6 py-2 rounded-lg font-mono text-sm transition-all duration-300 ${
+                  currentGame === 'tic-tac-toe' 
+                    ? 'bg-blue-500 text-white' 
+                    : 'text-blue-400 hover:bg-blue-500/20'
+                }`}
+              >
+                ⚡ Tic Tac Toe
               </button>
             </div>
           </div>
@@ -596,19 +595,18 @@ const Game = () => {
                       <div className="p-4 font-mono text-xs">
                         <div className="text-blue-400 mb-2">$ ./game_engine.exe</div>
                         <div className="text-gray-300 mb-1">Initializing AI opponent...</div>
-                        <div className="text-yellow-400 mb-1">Game: {currentGame.toUpperCase()}</div>
-                        {currentGame === 'tic-tac-toe' && (
-                          <div className="text-purple-400 mb-1">Difficulty: {gameMode.toUpperCase()}</div>
-                        )}
-                        {currentGame === 'chess' && (
+                        <div className="text-yellow-400 mb-1">Game: {currentGame === 'chess' ? 'CHESS' : 'TIC TAC TOE'}</div>
+                        {currentGame === 'chess' ? (
                           <>
                             <div className="text-purple-400 mb-1">Player: {currentPlayer.toUpperCase()}</div>
                             {isChessAIThinking && <div className="text-red-400 mb-1">AI THINKING...</div>}
                           </>
+                        ) : (
+                          <div className="text-purple-400 mb-1">Difficulty: {gameMode.toUpperCase()}</div>
                         )}
                         <div className="text-emerald-400">Ready to play!</div>
                         <div className="mt-4 text-blue-400 animate-pulse">
-                          {'>'} {isChessAIThinking ? 'AI is thinking...' : 'Waiting for your move...'}
+                          {'>'} {currentGame === 'chess' && isChessAIThinking ? 'AI is thinking...' : 'Waiting for your move...'}
                         </div>
                       </div>
                       
@@ -634,7 +632,70 @@ const Game = () => {
 
             {/* Game Area */}
             <div className="animate-slide-in-right">
-              {currentGame === 'tic-tac-toe' ? (
+              {currentGame === 'chess' ? (
+                <>
+                  {/* Chess Game */}
+                  <div className="text-center mb-6">
+                    <div className="sci-fi-border backdrop-blur-sm p-4">
+                      <div className="flex items-center justify-center space-x-4 mb-2">
+                        <Crown className="h-6 w-6 text-yellow-400" />
+                        <span className="text-lg font-mono">
+                          Current Player: <span className={currentPlayer === 'white' ? 'text-gray-200' : 'text-gray-600'}>{currentPlayer}</span>
+                        </span>
+                        <Shield className="h-6 w-6 text-blue-400" />
+                      </div>
+                      {chessWinner && (
+                        <div className="text-xl font-bold text-yellow-400 mb-2">
+                          {chessWinner === 'white' ? 'You Win!' : 'AI Wins!'} 👑
+                        </div>
+                      )}
+                      {isChessAIThinking && (
+                        <div className="text-lg text-red-400 font-mono animate-pulse">
+                          AI is thinking... 🤔
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Chess Board */}
+                  {chessBoard.length > 0 && (
+                    <div className="max-w-md mx-auto mb-6">
+                      <div className="grid grid-cols-8 gap-0 border-2 border-slate-600 rounded-lg overflow-hidden">
+                        {chessBoard.map((row, rowIndex) =>
+                          row.map((piece, colIndex) => (
+                            <button
+                              key={`${rowIndex}-${colIndex}`}
+                              onClick={() => handleChessSquareClick(rowIndex, colIndex)}
+                              className={`w-12 h-12 flex items-center justify-center text-2xl font-bold transition-all duration-200 ${
+                                (rowIndex + colIndex) % 2 === 0 
+                                  ? 'bg-slate-200 hover:bg-slate-300' 
+                                  : 'bg-slate-600 hover:bg-slate-500'
+                              } ${
+                                selectedSquare && selectedSquare[0] === rowIndex && selectedSquare[1] === colIndex
+                                  ? 'ring-2 ring-blue-400'
+                                  : ''
+                              }`}
+                              disabled={!!chessWinner || isChessAIThinking}
+                            >
+                              {getPieceSymbol(piece)}
+                            </button>
+                          ))
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Chess Controls */}
+                  <div className="text-center">
+                    <button
+                      onClick={resetGame}
+                      className="bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-300 font-mono"
+                    >
+                      New Game
+                    </button>
+                  </div>
+                </>
+              ) : (
                 <>
                   {/* Tic Tac Toe Controls */}
                   <div className="flex justify-between items-center mb-6">
@@ -741,69 +802,6 @@ const Game = () => {
                       className="border border-slate-600 text-slate-400 hover:text-red-400 hover:border-red-400 font-semibold py-2 px-6 rounded-lg transition-all duration-300 font-mono"
                     >
                       Reset Score
-                    </button>
-                  </div>
-                </>
-              ) : (
-                <>
-                  {/* Chess Game */}
-                  <div className="text-center mb-6">
-                    <div className="sci-fi-border backdrop-blur-sm p-4">
-                      <div className="flex items-center justify-center space-x-4 mb-2">
-                        <Crown className="h-6 w-6 text-yellow-400" />
-                        <span className="text-lg font-mono">
-                          Current Player: <span className={currentPlayer === 'white' ? 'text-gray-200' : 'text-gray-600'}>{currentPlayer}</span>
-                        </span>
-                        <Shield className="h-6 w-6 text-blue-400" />
-                      </div>
-                      {chessWinner && (
-                        <div className="text-xl font-bold text-yellow-400 mb-2">
-                          {chessWinner === 'white' ? 'You Win!' : 'AI Wins!'} 👑
-                        </div>
-                      )}
-                      {isChessAIThinking && (
-                        <div className="text-lg text-red-400 font-mono animate-pulse">
-                          AI is thinking... 🤔
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Chess Board */}
-                  {chessBoard.length > 0 && (
-                    <div className="max-w-md mx-auto mb-6">
-                      <div className="grid grid-cols-8 gap-0 border-2 border-slate-600 rounded-lg overflow-hidden">
-                        {chessBoard.map((row, rowIndex) =>
-                          row.map((piece, colIndex) => (
-                            <button
-                              key={`${rowIndex}-${colIndex}`}
-                              onClick={() => handleChessSquareClick(rowIndex, colIndex)}
-                              className={`w-12 h-12 flex items-center justify-center text-2xl font-bold transition-all duration-200 ${
-                                (rowIndex + colIndex) % 2 === 0 
-                                  ? 'bg-slate-200 hover:bg-slate-300' 
-                                  : 'bg-slate-600 hover:bg-slate-500'
-                              } ${
-                                selectedSquare && selectedSquare[0] === rowIndex && selectedSquare[1] === colIndex
-                                  ? 'ring-2 ring-blue-400'
-                                  : ''
-                              }`}
-                              disabled={!!chessWinner || isChessAIThinking}
-                            >
-                              {getPieceSymbol(piece)}
-                            </button>
-                          ))
-                        )}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Chess Controls */}
-                  <div className="text-center">
-                    <button
-                      onClick={resetGame}
-                      className="bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-300 font-mono"
-                    >
-                      New Game
                     </button>
                   </div>
                 </>
