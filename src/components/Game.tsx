@@ -640,18 +640,28 @@ const Game = () => {
                       <div className="flex items-center justify-center space-x-4 mb-2">
                         <Crown className="h-6 w-6 text-yellow-400" />
                         <span className="text-lg font-mono">
-                          Current Player: <span className={currentPlayer === 'white' ? 'text-gray-200' : 'text-gray-600'}>{currentPlayer}</span>
+                          Current Player: <span className={currentPlayer === 'white' ? 'text-blue-400 font-bold' : 'text-gray-400'}>{currentPlayer.toUpperCase()}</span>
                         </span>
                         <Shield className="h-6 w-6 text-blue-400" />
                       </div>
+                      {selectedSquare && !chessWinner && !isChessAIThinking && (
+                        <div className="text-sm text-blue-400 mt-2">
+                          Piece selected - Click a valid square to move
+                        </div>
+                      )}
+                      {!selectedSquare && !chessWinner && !isChessAIThinking && currentPlayer === 'white' && (
+                        <div className="text-sm text-gray-400 mt-2">
+                          Select one of your pieces (white) to move
+                        </div>
+                      )}
                       {chessWinner && (
-                        <div className="text-xl font-bold text-yellow-400 mb-2">
-                          {chessWinner === 'white' ? 'You Win!' : 'AI Wins!'} 👑
+                        <div className="text-xl font-bold text-yellow-400 mt-2">
+                          {chessWinner === 'white' ? 'You Win!' : 'AI Wins!'}
                         </div>
                       )}
                       {isChessAIThinking && (
-                        <div className="text-lg text-red-400 font-mono animate-pulse">
-                          AI is thinking... 🤔
+                        <div className="text-lg text-red-400 font-mono animate-pulse mt-2">
+                          AI is thinking...
                         </div>
                       )}
                     </div>
@@ -659,28 +669,66 @@ const Game = () => {
 
                   {/* Chess Board */}
                   {chessBoard.length > 0 && (
-                    <div className="max-w-md mx-auto mb-6">
-                      <div className="grid grid-cols-8 gap-0 border-2 border-slate-600 rounded-lg overflow-hidden">
+                    <div className="max-w-2xl mx-auto mb-6">
+                      <div className="grid grid-cols-8 gap-0 border-4 border-slate-700 rounded-lg overflow-hidden shadow-2xl">
                         {chessBoard.map((row, rowIndex) =>
-                          row.map((piece, colIndex) => (
-                            <button
-                              key={`${rowIndex}-${colIndex}`}
-                              onClick={() => handleChessSquareClick(rowIndex, colIndex)}
-                              className={`w-12 h-12 flex items-center justify-center text-2xl font-bold transition-all duration-200 ${
-                                (rowIndex + colIndex) % 2 === 0 
-                                  ? 'bg-slate-200 hover:bg-slate-300' 
-                                  : 'bg-slate-600 hover:bg-slate-500'
-                              } ${
-                                selectedSquare && selectedSquare[0] === rowIndex && selectedSquare[1] === colIndex
-                                  ? 'ring-2 ring-blue-400'
-                                  : ''
-                              }`}
-                              disabled={!!chessWinner || isChessAIThinking}
-                            >
-                              {getPieceSymbol(piece)}
-                            </button>
-                          ))
+                          row.map((piece, colIndex) => {
+                            const isSelected = selectedSquare && selectedSquare[0] === rowIndex && selectedSquare[1] === colIndex;
+                            const isLight = (rowIndex + colIndex) % 2 === 0;
+                            const canSelect = piece && piece.color === currentPlayer && !chessWinner && !isChessAIThinking;
+
+                            const isValidMove = selectedSquare &&
+                              isValidChessMove(chessBoard, selectedSquare[0], selectedSquare[1], rowIndex, colIndex);
+
+                            return (
+                              <button
+                                key={`${rowIndex}-${colIndex}`}
+                                onClick={() => handleChessSquareClick(rowIndex, colIndex)}
+                                className={`w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center text-4xl sm:text-5xl font-bold transition-all duration-200 relative ${
+                                  isLight
+                                    ? 'bg-amber-100 hover:bg-amber-200'
+                                    : 'bg-amber-700 hover:bg-amber-600'
+                                } ${
+                                  isSelected
+                                    ? 'ring-4 ring-inset ring-blue-500 shadow-lg shadow-blue-500/50'
+                                    : ''
+                                } ${
+                                  isValidMove
+                                    ? 'ring-4 ring-inset ring-green-400 shadow-lg shadow-green-400/50'
+                                    : ''
+                                } ${
+                                  canSelect
+                                    ? 'cursor-pointer hover:scale-105'
+                                    : piece && !isSelected
+                                    ? 'cursor-not-allowed opacity-70'
+                                    : ''
+                                }`}
+                                disabled={!!chessWinner || isChessAIThinking}
+                              >
+                                <span className={`select-none ${piece?.color === 'white' ? 'text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]' : 'text-gray-900 drop-shadow-[0_1px_1px_rgba(255,255,255,0.3)]'}`}>
+                                  {getPieceSymbol(piece)}
+                                </span>
+                                {isValidMove && !piece && (
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <div className="w-3 h-3 bg-green-400 rounded-full opacity-60"></div>
+                                  </div>
+                                )}
+                              </button>
+                            );
+                          })
                         )}
+                      </div>
+
+                      {/* Board coordinates */}
+                      <div className="flex justify-between mt-2 px-2 text-xs text-gray-500 font-mono">
+                        <span>A</span>
+                        <span>B</span>
+                        <span>C</span>
+                        <span>D</span>
+                        <span>E</span>
+                        <span>F</span>
+                        <span>G</span>
+                        <span>H</span>
                       </div>
                     </div>
                   )}
