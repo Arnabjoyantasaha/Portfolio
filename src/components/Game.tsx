@@ -528,7 +528,7 @@ const Game = () => {
   const switchGame = (game: 'tic-tac-toe' | 'chess') => {
     console.log('Switching to game:', game);
     setCurrentGame(game);
-    
+
     if (game === 'chess') {
       const newBoard = initializeChessBoard();
       setChessBoard(newBoard);
@@ -537,6 +537,10 @@ const Game = () => {
       setSelectedSquare(null);
       setIsChessAIThinking(false);
       setMoveHistory([]);
+    } else if (game === 'tic-tac-toe') {
+      setBoard(Array(9).fill(null));
+      setWinner(null);
+      setIsPlayerTurn(true);
     }
   };
 
