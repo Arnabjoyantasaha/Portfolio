@@ -340,6 +340,7 @@ button, a, .interactive {
   mask-composite: xor;
   -webkit-mask-composite: xor;
   animation: border-rotate 3s linear infinite;
+  pointer-events: none;
 }
 
 @keyframes border-rotate {
